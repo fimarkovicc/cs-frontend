@@ -1,35 +1,48 @@
 import { MongoClient } from "mongodb";
 
-const { MONGODB_URI, MONGODB_DB } = process.env;
+const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_DB = process.env.DB_NAME;
 
+// check the MongoDB URI
 if (!MONGODB_URI) {
-  throw new Error("MONGODB_URI is not defined in .env.local");
-}
-if (!MONGODB_DB) {
-  throw new Error("MONGODB_DB is not defined in .env.local");
+  throw new Error("Define the MONGODB_URI environmental variable");
 }
 
-let cached = global.mongo;
-if (!cached) cached = global.mongo = {};
+// check the MongoDB DB
+if (!MONGODB_DB) {
+  throw new Error("Define the MONGODB_DB environmental variable");
+}
+
+let cachedClient = null;
+let cachedDb = null;
 
 export async function connectToDatabase() {
-  if (cached.conn) return cached.conn;
-  if (!cached.promise) {
-    const conn = {};
-    const opts = {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+  // check the cached.
+  if (cachedClient && cachedDb) {
+    // load from cache
+    return {
+      client: cachedClient,
+      db: cachedDb,
     };
-    cached.promise = MongoClient.connect(MONGODB_URI, opts)
-      .then((client) => {
-        conn.client = client;
-        return client.db(MONGODB_DB);
-      })
-      .then((db) => {
-        conn.db;
-        cached.conn = conn;
-      });
   }
-  await cached.promise;
-  return cached.conn;
+
+  // set the connection options
+  const opts = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  };
+
+  // Connect to cluster
+  let client = new MongoClient(MONGODB_URI, opts);
+  await client.connect();
+  let db = client.db(MONGODB_DB);
+
+  // set cache
+  cachedClient = client;
+  cachedDb = db;
+
+  return {
+    client: cachedClient,
+    db: cachedDb,
+  };
 }

@@ -1,24 +1,60 @@
 import { connectToDatabase } from "./../utils/mongodb";
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
+import Link from "next/link";
 
-type Props = {
-  data: any;
+type HomeProps = {
+  data: {
+    _id: string;
+    price: number;
+    area: number;
+  }[];
 };
 
-export default function Home({ data }: Props) {
+export default function HomePage({ data }: HomeProps) {
+  // console.log(data);
   return (
     <div>
-      <h1>Home</h1>
-      {data ? "Connected" : "not connected"}
+      <h1>Županije...new</h1>
+      {data.map((item) => (
+        <p key={item._id}>
+          <Link href={`/${item._id}`}>{item._id}</Link>
+          {item._id} - prosječna cijena {item.price} - prosječna kvadratura{" "}
+          {item.area}
+        </p>
+      ))}
     </div>
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { client } = await connectToDatabase();
+export const getStaticProps: GetStaticProps = async (context) => {
+  const aggregation = [
+    {
+      $match: {
+        date: {
+          $gte: new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
+        },
+      },
+    },
+    {
+      $group: {
+        _id: "$state",
+        area: { $avg: "$area" },
+        price: { $avg: { $divide: ["$price", "$area"] } },
+      },
+    },
+    { $sort: { price: -1 } },
+  ];
 
-  //const isConnected = await client.isConnected();
+  const { db } = await connectToDatabase();
+
+  const data = await db
+    .collection("stanovi_njuskalo")
+    .aggregate(aggregation)
+    .toArray();
+
   return {
-    props: {},
+    props: {
+      data,
+    },
   };
 };
