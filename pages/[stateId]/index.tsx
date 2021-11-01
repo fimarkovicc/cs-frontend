@@ -7,23 +7,19 @@ type StateProps = {
     _id: string;
     price: number;
     area: number;
-    slug: [string];
+    city: [string];
+    state: [string];
+    state_slug: [string];
   }[];
   state: string;
 };
 
-export default function State({ data, state }: StateProps) {
+export default function State({ data }: StateProps) {
   return (
     <>
-      <h1>Županija...{state}</h1>
+      <h1>Županija...{data[0].state[0]}</h1>
       {data.map((item) => (
-        <div key={item._id}>
-          <Link href={`/${state}/${item.slug[0]}`}>{item._id}</Link>
-          <p>
-            {item._id} - prosječna cijena {item.price} - prosječna kvadratura{" "}
-            {item.area}
-          </p>
-        </div>
+        <Link href={`/${item.state_slug[0]}/${item._id}`}>{item._id}</Link>
       ))}
     </>
   );
@@ -32,7 +28,7 @@ export default function State({ data, state }: StateProps) {
 export const getStaticPaths: GetStaticPaths = async () => {
   const { db } = await connectToDatabase();
 
-  const data = await db.collection("stanovi_njuskalo").distinct("state");
+  const data = await db.collection("stanovi_njuskalo").distinct("state_slug");
 
   const paths = data.map((item: string) => {
     return { params: { stateId: item } };
@@ -48,7 +44,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const aggregation = [
     {
       $match: {
-        state: params?.stateId,
+        state_slug: params?.stateId,
         date: {
           $gte: new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
         },
@@ -57,9 +53,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     {
       $group: {
-        _id: "$city",
+        _id: "$city_slug",
         count: { $sum: 1 },
-        slug: { $addToSet: "$city_slug" },
+        city: { $addToSet: "$city" },
+        state: { $addToSet: "$state" },
+        state_slug: { $addToSet: "$state_slug" },
         area: { $avg: "$area" },
         price: { $avg: { $divide: ["$price", "$area"] } },
       },
@@ -75,6 +73,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     .toArray();
 
   return {
-    props: { data, state: params?.stateId },
+    props: { data },
   };
 };

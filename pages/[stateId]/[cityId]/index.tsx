@@ -11,7 +11,7 @@ type CityProps = {
 
 type PathsData = {
   _id: {
-    state: string;
+    state_slug: string;
     city_slug: string;
   };
 };
@@ -21,13 +21,7 @@ export default function City({ data }: CityProps) {
     <>
       <h1>grad...</h1>
       {data.map((item) => (
-        <div key={item._id}>
-          {/* <Link href={`/${state}/${item.slug[0]}`}>{item._id}</Link> */}
-          <p>
-            {item._id} - prosječna cijena {item.price} - prosječna kvadratura{" "}
-            {item.area}
-          </p>
-        </div>
+        <p>{item._id}</p>
       ))}
     </>
   );
@@ -37,14 +31,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const aggregation = [
     {
       $project: {
-        state: 1,
+        state_slug: 1,
         city_slug: 1,
       },
     },
     {
       $group: {
         _id: {
-          state: "$state",
+          state_slug: "$state_slug",
           city_slug: "$city_slug",
         },
       },
@@ -59,7 +53,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     .toArray();
 
   const paths = data.map((item: PathsData) => {
-    const stateId = item._id.state;
+    const stateId = item._id.state_slug;
     const cityId = item._id.city_slug;
     return {
       params: {

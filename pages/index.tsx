@@ -1,25 +1,30 @@
 import { connectToDatabase } from "./../utils/mongodb";
 import { GetStaticProps } from "next";
 import Link from "next/link";
+import Chart from "./../components/Chart";
 
 type HomeProps = {
   data: {
     _id: string;
     price: number;
     area: number;
+    state: [string];
   }[];
 };
 
 export default function HomePage({ data }: HomeProps) {
-  // console.log(data);
+  console.log(data);
   return (
-    <div>
-      <h1>Županije...new</h1>
+    <div className="container">
+      <h2>Pregled po županijama</h2>
+
+      <div className="chart">
+        <Chart data={data} />
+      </div>
+
       {data.map((item) => (
         <p key={item._id}>
-          <Link href={`/${item._id}`}>{item._id}</Link>
-          {item._id} - prosječna cijena {item.price} - prosječna kvadratura{" "}
-          {item.area}
+          <Link href={`/${item._id}`}>{item.state[0]}</Link>
         </p>
       ))}
     </div>
@@ -37,12 +42,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
     },
     {
       $group: {
-        _id: "$state",
+        _id: "$state_slug",
+        state: { $addToSet: "$state" },
         area: { $avg: "$area" },
         price: { $avg: { $divide: ["$price", "$area"] } },
       },
     },
-    { $sort: { price: -1 } },
+    { $sort: { _id: 1 } },
   ];
 
   const { db } = await connectToDatabase();
@@ -56,5 +62,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     props: {
       data,
     },
+    revalidate: 86400,
   };
 };
