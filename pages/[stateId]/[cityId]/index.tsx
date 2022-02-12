@@ -21,7 +21,7 @@ export default function City({ data }: CityProps) {
     <>
       <h1>grad...</h1>
       {data.map((item) => (
-        <p>{item._id}</p>
+        <p key={item._id}>{item._id}</p>
       ))}
     </>
   );

@@ -19,7 +19,7 @@ export default function State({ data }: StateProps) {
     <>
       <h1>Županija...{data[0].state[0]}</h1>
       {data.map((item) => (
-        <Link href={`/${item.state_slug[0]}/${item._id}`}>{item._id}</Link>
+        <Link key={item._id} href={`/${item.state_slug[0]}/${item._id}`}>{item._id}</Link>
       ))}
     </>
   );
