@@ -1,6 +1,6 @@
 import { aggregationConstants } from './../constants/aggregationConstants'
 
-export const hpMainChartAgg = [
+export const compareMiscAgg = [
     {
       $match: {
         date: {
@@ -8,14 +8,12 @@ export const hpMainChartAgg = [
         },
         price: aggregationConstants.filterValues.price,
         area: aggregationConstants.filterValues.area,
-        // price: { $gte: 7000 },
-        // area: { $gt: 1 },
       },
     },
     {
       $group: {
-        _id: "$state_slug",
-        state: { $addToSet: "$state" },
+        _id: "$city_slug",
+        city: { $addToSet: "$city" },
         area: { $avg: "$area" },
         price: { $avg: { $divide: ["$price", "$area"] } },
       },

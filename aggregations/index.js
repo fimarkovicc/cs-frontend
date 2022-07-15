@@ -1,3 +1,4 @@
 export { avgPriceLastYearAgg } from "./avgPriceLastYearAgg"
-export { HpMainChartAgg } from "./HpMainChartAgg"
+export { hpMainChartAgg } from "./hpMainChartAgg"
 export { recentlyAddedAgg } from "./recentlyAddedAgg"
+export { compareMiscAgg } from "./compareMiscAgg"
