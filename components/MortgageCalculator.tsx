@@ -5,7 +5,7 @@ function MortgageCalculator(){
     const [principal, setPrincipal] = useState('100000')
     const [interestRate, setInterestRate] = useState('3.08')
     const [years, setYears] = useState('30')
-    const [mortgage, setMortgage] = useState('')
+    const [mortgage, setMortgage] = useState({})
     const [isModalVisible, setIsModalVisible] = useState(false)
 
     function handleChange(e: React.SyntheticEvent): void{
@@ -26,7 +26,12 @@ function MortgageCalculator(){
         let i = (Number(interestRate) / 100) / 12
         let n = Number(years) * 12        
         let m = Math.round(p * i * (Math.pow(1 + i, n)) / (Math.pow(1 + i, n) - 1))
-        console.log(p, i, n, mortgage)
+        setMortgage({
+            principal: p,
+            interestRate: i,
+            years: n,
+            payment: m
+        })
     }
 
     function handleSubmit(e: React.SyntheticEvent): void{
@@ -55,7 +60,7 @@ function MortgageCalculator(){
             <input type="submit" value="Izračunaj" />
             <input type="button" value="Reset" onClick={resetFields} />
             </form>
-            {/* <MortgageModal isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} data={} /> */}
+            <MortgageModal isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} mortgage={mortgage as any} />
         </>
     )
 }

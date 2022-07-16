@@ -65,7 +65,7 @@ export default function HomePage(props: HomeProps) {
 }
 
 // export const getStaticProps: GetStaticProps = async (context) => {
-//   // const { db } = await connectToDatabase();
+//   const { db } = await connectToDatabase();
   
 //   const avgPriceLastYearData = await db
 //     .collection(collection)
