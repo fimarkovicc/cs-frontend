@@ -10,6 +10,7 @@ import CompareMisc from "../components/CompareMisc"
 import Cities from "../components/Cities"
 import avgInterestRates from "../constants/interstRates"
 import MortgageCalculator from "../components/MortgageCalculator"
+import MortgageFaq from './../components/MortgageFaq/MortgageFaq'
 
 const collection = process.env.COLLECTION;
 
@@ -22,16 +23,16 @@ type HomeProps = {
 };
 
 export default function HomePage(props: HomeProps) {
-  // const { hpMainChartData, avgPriceLastYearData, recentlyAddedData, compareMiscData } = props;
-  // const router = useRouter();
+  const { hpMainChartData, avgPriceLastYearData, recentlyAddedData, compareMiscData } = props;
+  const router = useRouter();
   
-  // const handleUrlChange = (e: { target: { value: string } }) => {
-  //   e.target.value && router.push(`${e.target.value}`);
-  // };
+  const handleUrlChange = (e: { target: { value: string } }) => {
+    e.target.value && router.push(`${e.target.value}`);
+  };
 
   return (
     <main className="container">
-      {/* <div>
+      <div>
         <h2>Pratimo, analiziramo, informiramo. </h2>
         <p>42 gradova, 157 općina, 10560 stanova</p>
         <select onChange={handleUrlChange}>
@@ -58,42 +59,43 @@ export default function HomePage(props: HomeProps) {
       
       <RecentlyAdded data={recentlyAddedData} />
       <CompareMisc data={compareMiscData} />
-      <Cities /> */}
+      <Cities />
       <MortgageCalculator />
+      <MortgageFaq />
     </main>
   );
 }
 
-// export const getStaticProps: GetStaticProps = async (context) => {
-//   const { db } = await connectToDatabase();
+export const getStaticProps: GetStaticProps = async (context) => {
+  const { db } = await connectToDatabase();
   
-//   const avgPriceLastYearData = await db
-//     .collection(collection)
-//     .aggregate(avgPriceLastYearAgg)
-//     .toArray();
+  const avgPriceLastYearData = await db
+    .collection(collection)
+    .aggregate(avgPriceLastYearAgg)
+    .toArray();
 
-//   const hpMainChartData = await db
-//     .collection(collection)
-//     .aggregate(hpMainChartAgg)
-//     .toArray();
+  const hpMainChartData = await db
+    .collection(collection)
+    .aggregate(hpMainChartAgg)
+    .toArray();
 
-//   const recentlyAddedData = await db
-//     .collection(collection)
-//     .aggregate(recentlyAddedAgg)
-//     .toArray();
+  const recentlyAddedData = await db
+    .collection(collection)
+    .aggregate(recentlyAddedAgg)
+    .toArray();
 
-//   const compareMiscData = await db
-//     .collection(collection)
-//     .aggregate(compareMiscAgg)
-//     .toArray();
+  const compareMiscData = await db
+    .collection(collection)
+    .aggregate(compareMiscAgg)
+    .toArray();
 
-//   return {
-//     props: {
-//       hpMainChartData: JSON.parse(JSON.stringify(hpMainChartData)),
-//       avgPriceLastYearData: JSON.parse(JSON.stringify(avgPriceLastYearData)),
-//       recentlyAddedData: JSON.parse(JSON.stringify(recentlyAddedData)),      
-//       compareMiscData: JSON.parse(JSON.stringify(compareMiscData))      
-//     },
-//     revalidate: 86400
-//   };
-// };
+  return {
+    props: {
+      hpMainChartData: JSON.parse(JSON.stringify(hpMainChartData)),
+      avgPriceLastYearData: JSON.parse(JSON.stringify(avgPriceLastYearData)),
+      recentlyAddedData: JSON.parse(JSON.stringify(recentlyAddedData)),      
+      compareMiscData: JSON.parse(JSON.stringify(compareMiscData))      
+    },
+    revalidate: 86400
+  };
+};

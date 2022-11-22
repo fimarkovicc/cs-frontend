@@ -1,15 +1,18 @@
 import React, { ReactEventHandler, useState } from 'react'
 import MortgageModal from './MortgageModal'
+import avgInterestRates from './../constants/interstRates'
 
 function MortgageCalculator(){
-    const [principal, setPrincipal] = useState('100000')
-    const [interestRate, setInterestRate] = useState('3.08')
-    const [years, setYears] = useState('30')
+    const avgInterestRate = avgInterestRates()
+
+    const [principal, setPrincipal] = useState('')
+    const [interestRate, setInterestRate] = useState(avgInterestRate as any)
+    const [years, setYears] = useState('')
     const [mortgage, setMortgage] = useState({})
     const [isModalVisible, setIsModalVisible] = useState(false)
 
     function handleChange(e: React.SyntheticEvent): void{
-        let target = e.target as HTMLInputElement;
+        let target = e.target as HTMLInputElement
         target.name == 'principal' && setPrincipal(target.value)
         target.name == 'interest-rate' && setInterestRate(target.value)
         target.name == 'years' && setYears(target.value)
@@ -43,7 +46,7 @@ function MortgageCalculator(){
 
     return (
         <>
-            <h2>Kreditni kalkulator</h2>
+            <h2 id="kalkulator">Kreditni kalkulator</h2>
             <form onSubmit={handleSubmit}>
             <label>
                 Iznos kredita:

@@ -35,11 +35,12 @@ function MortgageModal(props: Props) {
         <span onClick={() => setIsModalVisible(false)}>Close</span>
         <h3>Izračun kredita</h3>
         <ul>
-            <li>Osnovica: {osnovica}€</li>
-            <li>Kamatna stopa: {kamtatnaStopa}%</li>
+            <li>Osnovica: {osnovica.toLocaleString('hr-HR')}€</li>
+            <li>Kamatna stopa: {kamtatnaStopa.toLocaleString('hr-HR')}%</li>
             <li>Trajanje otplate: {godineOtplate} godina</li>
-            <li>Mjesečna rata: {rata}€</li>
-            <li>Ukupno za isplatiti: {ukupnaIsplata}€</li>
+            <li>Mjesečna rata: {rata.toLocaleString('hr-HR')}€</li>
+            <li>Ukupno za isplatiti: {ukupnaIsplata.toLocaleString('hr-HR')}€</li>
+            <li>Ukupno kamata: {(ukupnaIsplata - osnovica).toLocaleString('hr-HR')}€</li>
         </ul>
         <ChartMortgage data={{osnovica, ukupnaIsplata}} />
     </div>

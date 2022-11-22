@@ -61,7 +61,7 @@ function CompareMisc(props: CompareMiscProps){
 
     return (
         <>
-            <h2>Usporedbe</h2>
+            <h2 id="usporedbe">Usporedbe</h2>
             <ul>
                 {citiesToCompare.map((city, i) => {
                     if(i % 2 == 0){
