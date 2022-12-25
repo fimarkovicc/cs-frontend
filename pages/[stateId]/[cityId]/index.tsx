@@ -1,5 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import { connectToDatabase } from "../../../utils/mongodb";
+const citiesList = require('./../../../constants/statesAndCitties.json');
+import { states } from "./../../../utils/states"
 
 type CityProps = {
   data: {
@@ -16,6 +18,13 @@ type PathsData = {
   };
 };
 
+type StatesAndCities = {
+  params: {
+    stateId: string;
+    cityId: string;
+  }
+}
+
 export default function City({ data }: CityProps) {
   return (
     <>
@@ -28,44 +37,13 @@ export default function City({ data }: CityProps) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const aggregation = [
-    {
-      $project: {
-        state_slug: 1,
-        city_slug: 1,
-      },
-    },
-    {
-      $group: {
-        _id: {
-          state_slug: "$state_slug",
-          city_slug: "$city_slug",
-        },
-      },
-    },
-  ];
 
-  const { db } = await connectToDatabase();
-
-  const data = await db
-    .collection("stanovi_njuskalo")
-    .aggregate(aggregation)
-    .toArray();
-
-  const paths = data.map((item: PathsData) => {
-    const stateId = item._id.state_slug;
-    const cityId = item._id.city_slug;
-    return {
-      params: {
-        stateId,
-        cityId,
-      },
-    };
-  });
+  const stateNames = states.map(item => item.url)
+  const paths = citiesList.filter((item: StatesAndCities) => stateNames.includes(item.params.stateId))
 
   return {
     paths,
-    fallback: false,
+    fallback: false
   };
 };
 
@@ -101,6 +79,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     .toArray();
 
   return {
-    props: { data },
+    props: { data }
   };
 };

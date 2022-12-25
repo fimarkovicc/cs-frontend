@@ -26,7 +26,7 @@ function Cities(){
     return (
         <>
             <h3 id="gradovi">Gradovi</h3>
-            <ul style={{display: "flex"}}>{sortedCities.map((item, i, arr) => {
+            <ul style={{display: "flex", flexWrap: "wrap"}}>{sortedCities.map((item, i, arr) => {
             if(i + 1 != arr.length){
                 if(i == 0){
                     return (

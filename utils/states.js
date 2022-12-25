@@ -11,7 +11,7 @@ export const states = [
     { url: "koprivnicko-krizevacka", name: "koprivničko-križevačka" },
     { url: "krapinsko-zagorska", name: "krapinsko-zagorska" },
     { url: "licko-senjska", name: "ličko-senjska" },
-    { url: "medimurje", name: "međimurje" },
+    { url: "medimurska", name: "međimurska" },
     { url: "osjecko-baranjska", name: "osječko-baranjska" },
     { url: "sisacko-moslavacka", name: "sisačko-moslavačka" },
     { url: "splitsko-dalmatinska", name: "splitsko-dalmatinska" },
