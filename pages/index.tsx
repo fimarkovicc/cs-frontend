@@ -28,6 +28,14 @@ export default function HomePage(props: HomeProps) {
     const { hpMainChartData, avgPriceLastYearData, recentlyAddedData, compareMiscData } = props
     const router = useRouter()
 
+    const barChartDataPrice = hpMainChartData.map(item => {
+        return {
+            name: item.state[item.state.length-1],
+            value: Math.round(item.price),
+            id: item._id
+        }
+    })
+
     const handleUrlChange = (e: { target: { value: string } }) => {
         e.target.value && router.push(`${e.target.value}`)
     }
@@ -51,7 +59,7 @@ export default function HomePage(props: HomeProps) {
 
             <h2>Pregled po županijama</h2>
 
-            <BarChart data={hpMainChartData} />
+            <BarChart data={barChartDataPrice} />
 
             <h2>Ukratko</h2>
             <p>Prosječna cijena kvadrata stana u Hrvatskoj u zadnjih godinu dana je {Math.round(avgPriceLastYearData[0].avgprice / avgPriceLastYearData[0].avgarea)} €/m2.</p>

@@ -17,20 +17,20 @@ type StateProps = {
 };
 
 export default function State({ data }: StateProps) {
-    console.log(data)
+    // console.log(data)
 
-    const barChartData = data.map(item => {
+    const barChartDataPrice = data.map(item => {
         return {
-            state: [item.city],
-            price: Math.round(item.price),
-            _id: item._id
+            name: item.city[item.city.length-1],
+            value: Math.round(item.price),
+            id: item._id
         }
     })
 
     return (
         <>
             <h1>Županija {data[0].state[0]}</h1>
-            <BarChart data={barChartData} />
+            <BarChart data={barChartDataPrice} />
             <ul>
                 {data.map((item) => (
                     <li key={item._id}>
