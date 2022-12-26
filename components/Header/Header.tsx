@@ -15,7 +15,7 @@ export default function Header() {
           <a href="#gradovi">Gradovi</a>
           <a href="#usporedbe">Usporedbe</a>
           <a href="#kalkulator">Kreditni kalkulator</a>
-          <a href="#faq">ČPP</a>
+          <a href="#faq">FAQ</a>
         </nav>
       </header>
     </HeaderStyled>

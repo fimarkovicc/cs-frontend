@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app";
-import Header from "../components/Header/Header";
-import Footer from "../components/Footer";
+import Header from "@components/Header/Header";
+import Footer from "@components/Footer";
 import { GlobalStyle } from "../styles";
 import Head from 'next/head'
 
