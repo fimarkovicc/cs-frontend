@@ -1,13 +1,17 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 import { connectToDatabase } from "@utils/mongodb"
-const citiesList = require("@constants/statesAndCitties.json")
+const citiesList = require("@constants/statesAndCities.json")
 import { states } from "@utils/states"
+import BarChart from "@components/BarChart/BarChart"
+import { averageCalc } from "@helpers/averageCalc"
 
 type CityProps = {
   data: {
     _id: string;
     price: number;
     area: number;
+    city: string[];
+    count: number;
   }[];
 };
 
@@ -26,9 +30,47 @@ type StatesAndCities = {
 }
 
 export default function City({ data }: CityProps) {
+    console.log(data)
+
+    const barChartDataPrice = data.map(item => {
+        return {
+            name: item._id,
+            value: Math.round(item.price),
+            id: item._id,
+            count: item.count
+        }
+    })
+
+    const barChartDataSumPrice = data.map(item => {
+        return {
+            name: item._id,
+            value: Math.round(item.price * item.area),
+            id: item._id,
+            count: item.count
+        }
+    })
+
+    const barChartDataArea = data.map(item => {
+        return {
+            name: item._id,
+            value: Math.round(item.area),
+            id: item._id,
+            count: item.count
+        }
+    })
+
+    const avgPrice = averageCalc(barChartDataPrice.map(obj => obj.value))
+
     return (
         <>
-            <h1>grad...</h1>
+            <h1>{data[0].city[0]}</h1>
+
+            <BarChart data={barChartDataPrice} title="Prosječna cijena po kvadratu (&#8364;/m<sup>2</sup>)" avgBarPrice={avgPrice} />
+            <BarChart data={barChartDataSumPrice} title="Prosječna ukupna cijena (&#8364;)" />
+            <BarChart data={barChartDataArea} title="Prosječna veličina stana (m<sup>2</sup>)" />
+
+            <p>* Zbog malog uzorka označeni gradovi/kvartovi ne prikazuju relevantno stanje.</p>
+
             {data.map((item) => (
                 <p key={item._id}>{item._id}</p>
             ))}

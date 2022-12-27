@@ -18,36 +18,36 @@ function CompareMisc(props: CompareMiscProps){
     const cities = props.data
     const citiesToCompare: citiesToCompareTypes = []
     // @ts-ignore
-    citiesToCompare.push(cities.find(o => o._id == 'split'))
+    citiesToCompare.push(cities.find(o => o._id == "split"))
     // @ts-ignore
-    citiesToCompare.push(cities.find(o => o._id == 'donji-grad'))
+    citiesToCompare.push(cities.find(o => o._id == "donji-grad"))
     // @ts-ignore
-    citiesToCompare.push(cities.find(o => o._id == 'rijeka'))
+    citiesToCompare.push(cities.find(o => o._id == "rijeka"))
     // @ts-ignore
-    citiesToCompare.push(cities.find(o => o._id == 'pula'))
+    citiesToCompare.push(cities.find(o => o._id == "pula"))
     // @ts-ignore
-    citiesToCompare.push(cities.find(o => o._id == 'osijek'))
+    citiesToCompare.push(cities.find(o => o._id == "osijek"))
     // @ts-ignore
-    citiesToCompare.push(cities.find(o => o._id == 'dubrovnik'))
+    citiesToCompare.push(cities.find(o => o._id == "dubrovnik"))
     // @ts-ignore
-    citiesToCompare.push(cities.find(o => o._id == 'zadar'))
+    citiesToCompare.push(cities.find(o => o._id == "zadar"))
     // @ts-ignore
-    citiesToCompare.push(cities.find(o => o._id == 'sibenik'))
+    citiesToCompare.push(cities.find(o => o._id == "sibenik"))
     // @ts-ignore
-    citiesToCompare.push(cities.find(o => o._id == 'vukovar'))
+    citiesToCompare.push(cities.find(o => o._id == "vukovar"))
     // @ts-ignore
-    citiesToCompare.push(cities.find(o => o._id == 'koprivnica'))
+    citiesToCompare.push(cities.find(o => o._id == "koprivnica"))
     // @ts-ignore
-    citiesToCompare.push(cities.find(o => o._id == 'varazdin'))
+    citiesToCompare.push(cities.find(o => o._id == "varazdin"))
     // @ts-ignore
-    citiesToCompare.push(cities.find(o => o._id == 'cakovec'))
+    citiesToCompare.push(cities.find(o => o._id == "cakovec"))
     // @ts-ignore
-    citiesToCompare.push(cities.find(o => o._id == 'dubrovnik'))
+    citiesToCompare.push(cities.find(o => o._id == "dubrovnik"))
     // @ts-ignore
-    citiesToCompare.push(cities.find(o => o._id == 'opatija'))
+    citiesToCompare.push(cities.find(o => o._id == "opatija"))
 
     // zagreb fix
-    citiesToCompare[1].city[0] = 'Zagreb'
+    citiesToCompare[1].city[0] = "Zagreb"
 
     function prepareCityList(i: number){      
         if(i < citiesToCompare.length-1){
@@ -65,8 +65,8 @@ function CompareMisc(props: CompareMiscProps){
             <ul>
                 {citiesToCompare.map((city, i) => {
                     if(i % 2 == 0){
-                    return <li key={city._id.toString()}>{prepareCityList(i)}</li>
-                }})}
+                        return <li key={city._id.toString()}>{prepareCityList(i)}</li>
+                    }})}
             </ul>
         </>
     )

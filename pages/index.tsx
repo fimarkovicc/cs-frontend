@@ -18,6 +18,7 @@ type HomeProps = {
     state: string[];
     price: number;
     _id: string;
+    count: number;
   }[],
   avgPriceLastYearData: any,
   recentlyAddedData: any,
@@ -32,14 +33,15 @@ export default function HomePage(props: HomeProps) {
         return {
             name: item.state[item.state.length-1],
             value: Math.round(item.price),
-            id: item._id
+            id: item._id,
+            count: item.count
         }
     })
 
     const handleUrlChange = (e: { target: { value: string } }) => {
         e.target.value && router.push(`${e.target.value}`)
     }
-
+    console.log(avgPriceLastYearData)
     return (
         <main className="container">
             <div>
@@ -59,7 +61,7 @@ export default function HomePage(props: HomeProps) {
 
             <h2>Pregled po županijama</h2>
 
-            <BarChart data={barChartDataPrice} />
+            <BarChart data={barChartDataPrice} avgBarPrice={Math.round(avgPriceLastYearData[0].avgprice / avgPriceLastYearData[0].avgarea)} />
 
             <h2>Ukratko</h2>
             <p>Prosječna cijena kvadrata stana u Hrvatskoj u zadnjih godinu dana je {Math.round(avgPriceLastYearData[0].avgprice / avgPriceLastYearData[0].avgarea)} €/m2.</p>

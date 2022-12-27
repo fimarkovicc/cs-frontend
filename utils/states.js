@@ -20,4 +20,4 @@ export const states = [
     { url: "vukovarsko-srijemska", name: "vukovarsko-srijemska" },
     { url: "zadarska", name: "zadarska" },
     { url: "zagrebacka", name: "zagrebačka" },
-  ];
+]

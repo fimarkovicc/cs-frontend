@@ -13,4 +13,8 @@ export const BarChartStyled = styled.div`
         justify-content: space-between;
         margin: 4px 0;
     }
+
+    .average {
+        background-color: beige;
+    }
 `
