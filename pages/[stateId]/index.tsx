@@ -1,10 +1,10 @@
 import { GetStaticProps, GetStaticPaths } from "next"
-import { states } from "@utils/states"
-import { connectToDatabase } from "@utils/mongodb"
+import { states } from "src/utils/states"
+import { connectToDatabase } from "src/utils/mongodb"
 import Link from "next/link"
-import BarChart from "@components/BarChart/BarChart"
-import { averageCalc } from "@helpers/averageCalc"
-import { capitalize } from "@helpers/capitalize"
+import BarChart from "src/components/BarChart/BarChart"
+import { averageCalc } from "src/helpers/averageCalc"
+import { capitalize } from "src/helpers/capitalize"
 
 type StateProps = {
   data: {

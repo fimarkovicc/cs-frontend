@@ -1,5 +1,5 @@
 import React from 'react'
-import { cities } from './../utils/cities'
+import { cities } from '../utils/cities'
 import Link from 'next/link'
 
 function Cities(){

@@ -1,5 +1,5 @@
 import FaqItem from "./FaqItem/FaqItem"
-import { faqs } from './../../constants/faqs'
+import { faqs } from "src/constants/faqs"
 
 function MortgageFaq(){
 

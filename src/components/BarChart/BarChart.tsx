@@ -1,6 +1,6 @@
 import React from "react"
 import { BarChartStyled } from "./BarChart.styled"
-import { averageCalc } from "@helpers/averageCalc"
+import { averageCalc } from "src/helpers/averageCalc"
 
 type BarChartProps = {
     data: {
@@ -15,7 +15,7 @@ type BarChartProps = {
 
 function BarChart(props: BarChartProps) {
     const { data, title, avgBarPrice = 0 } = props
-
+    console.log(data.length)
     const values = data.map(obj => obj.value)
     const maxValue = Math.max(...values)
 
@@ -27,13 +27,19 @@ function BarChart(props: BarChartProps) {
                     (
                         item.id && 
                             (
-                                (avgBarPrice && item.value > avgBarPrice && data[i+1].value < avgBarPrice) ?
-                                    <li key={i} className="chart-item average" style={{width: `${Math.round((avgBarPrice/maxValue)*100)}%`}}>
-                                        <span>Prosjek</span>
-                                        <span>{avgBarPrice}</span>
-                                    </li>
+                                (avgBarPrice && item.value > avgBarPrice && data[i+1].value < avgBarPrice && data.length > 3) ?
+                                    <div key={i}>
+                                        <li className="chart-item" style={{width: `${Math.round((item.value/maxValue)*100)}%`}}>
+                                            <span>{item.name}{item.count < 5 && "*"}</span>
+                                            <span>{item.value}</span>
+                                        </li>
+                                        <li className="chart-item average" style={{width: `${Math.round((avgBarPrice/maxValue)*100)}%`}}>
+                                            <span>Prosjek</span>
+                                            <span>{avgBarPrice}</span>
+                                        </li>
+                                    </div>
                                     :
-                                    <li key={i} className="chart-item" style={{width: `${Math.round((item.value/maxValue)*100)}%`}}>
+                                    <li className="chart-item" style={{width: `${Math.round((item.value/maxValue)*100)}%`}}>
                                         <span>{item.name}{item.count < 5 && "*"}</span>
                                         <span>{item.value}</span>
                                     </li>

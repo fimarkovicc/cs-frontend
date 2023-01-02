@@ -1,4 +1,4 @@
-import { aggregationConstants } from "./../constants/aggregationConstants"
+import { aggregationConstants } from "@constants/aggregationConstants"
 
 export const avgPriceLastYearAgg = [
     {

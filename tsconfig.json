@@ -20,17 +20,23 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
+      "@global/*": [
+        "./src/*"
+      ],
       "@components/*": [
-        "components/*"
+        "src/components/*"
       ],
       "@utils/*": [
-        "utils/*"
+        "src/utils/*"
       ],
       "@constants/*": [
-        "constants/*"
+        "src/constants/*"
       ],
       "@helpers/*": [
-        "helpers/*"
+        "src/helpers/*"
+      ],
+      "@styles/*": [
+        "src/styles.ts"
       ]
     }
   },

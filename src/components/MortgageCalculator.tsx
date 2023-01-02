@@ -1,27 +1,27 @@
-import React, { ReactEventHandler, useState } from 'react'
-import MortgageModal from './MortgageModal'
-import avgInterestRates from './../constants/interstRates'
+import React, { ReactEventHandler, useState } from "react"
+import MortgageModal from "./MortgageModal"
+import avgInterestRates from "../constants/interstRates"
 
 function MortgageCalculator(){
     const avgInterestRate = avgInterestRates()
 
-    const [principal, setPrincipal] = useState('')
+    const [principal, setPrincipal] = useState("")
     const [interestRate, setInterestRate] = useState(avgInterestRate as any)
-    const [years, setYears] = useState('')
+    const [years, setYears] = useState("")
     const [mortgage, setMortgage] = useState({})
     const [isModalVisible, setIsModalVisible] = useState(false)
 
     function handleChange(e: React.SyntheticEvent): void{
         let target = e.target as HTMLInputElement
-        target.name == 'principal' && setPrincipal(target.value)
-        target.name == 'interest-rate' && setInterestRate(target.value)
-        target.name == 'years' && setYears(target.value)
+        target.name == "principal" && setPrincipal(target.value)
+        target.name == "interest-rate" && setInterestRate(target.value)
+        target.name == "years" && setYears(target.value)
     }
 
     function resetFields(){
-        setPrincipal('')
-        setInterestRate('')
-        setYears('')
+        setPrincipal("")
+        setInterestRate("")
+        setYears("")
     }
 
     function calculateMortgage(){
@@ -48,20 +48,20 @@ function MortgageCalculator(){
         <>
             <h2 id="kalkulator">Kreditni kalkulator</h2>
             <form onSubmit={handleSubmit}>
-            <label>
+                <label>
                 Iznos kredita:
-                <input type="number" name="principal" value={principal} onChange={handleChange} required />
-            </label>
-            <label>
+                    <input type="number" name="principal" value={principal} onChange={handleChange} required />
+                </label>
+                <label>
                 Godišnja kamatna stopa:
-                <input type="number" name="interest-rate" value={interestRate} onChange={handleChange} required />
-            </label>
-            <label>
+                    <input type="number" name="interest-rate" value={interestRate} onChange={handleChange} required />
+                </label>
+                <label>
                 Trajanje u godinama:
-                <input type="number" name="years" value={years} onChange={handleChange} required />
-            </label>
-            <input type="submit" value="Izračunaj" />
-            <input type="button" value="Reset" onClick={resetFields} />
+                    <input type="number" name="years" value={years} onChange={handleChange} required />
+                </label>
+                <input type="submit" value="Izračunaj" />
+                <input type="button" value="Reset" onClick={resetFields} />
             </form>
             <MortgageModal isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} mortgage={mortgage as any} />
         </>

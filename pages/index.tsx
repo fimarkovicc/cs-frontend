@@ -1,15 +1,15 @@
-import { connectToDatabase } from "@utils/mongodb"
+import { connectToDatabase } from "src/utils/mongodb"
 import { GetStaticProps } from "next"
 import { useRouter } from "next/router"
-import { states } from "@utils/states"
-import { avgPriceLastYearAgg, hpMainChartAgg, recentlyAddedAgg, compareMiscAgg } from "./../aggregations/index"
-import RecentlyAdded from "@components/RecentlyAdded"
-import CompareMisc from "@components/CompareMisc"
-import Cities from "@components/Cities"
-import avgInterestRates from "@constants/interstRates"
-import MortgageCalculator from "@components/MortgageCalculator"
-import MortgageFaq from "@components/MortgageFaq/MortgageFaq"
-import BarChart from "@components/BarChart/BarChart"
+import { states } from "src/utils/states"
+import { avgPriceLastYearAgg, hpMainChartAgg, recentlyAddedAgg, compareMiscAgg } from "./../src/aggregations/index"
+import RecentlyAdded from "src/components/RecentlyAdded"
+import CompareMisc from "src/components/CompareMisc"
+import Cities from "src/components/Cities"
+import avgInterestRates from "src/constants/interstRates"
+import MortgageCalculator from "src/components/MortgageCalculator"
+import MortgageFaq from "src/components/MortgageFaq/MortgageFaq"
+import BarChart from "src/components/BarChart/BarChart"
 
 const collection = process.env.COLLECTION
 
@@ -43,7 +43,7 @@ export default function HomePage(props: HomeProps) {
     }
     console.log(avgPriceLastYearData)
     return (
-        <main className="container">
+        <div className="container">
             <div>
                 <h2>Pratimo, analiziramo, informiramo. </h2>
                 <p>42 gradova, 157 općina, 10560 stanova</p>
@@ -73,7 +73,7 @@ export default function HomePage(props: HomeProps) {
             <Cities />
             <MortgageCalculator />
             <MortgageFaq />
-        </main>
+        </div>
     )
 }
 

@@ -1,13 +1,13 @@
 export const faqs = [
     {
-        title: 'Koliki kredit si mogu priuštiti?',
+        title: "Koliki kredit si mogu priuštiti?",
         content: `
         <p>Ako niste sigurni koliki bi dio vašeg prihoda trebao ići na stanovanje, slijedite provjereno pravilo od 1/3. Mnogi financijski savjetnici vjeruju da ne biste trebali potrošiti više od 1/3 svojih mjesečnih prihoda na troškove stanovanja, kao što su najamnina ili plaćanje stambenog  kredita.</p>
         <p> Zapamtite mjesečni izdaci za otplatu hipoteke uključuju glavnicu, kamate, eventualne poreze i osiguranje nekretnine - sveukupno ne bi trebali premašiti 1/3 vaših primanja.</p>
         `
     },
     {
-        title: 'Koji su dodatni troškovi uključeni u otplatu hipoteke?',
+        title: "Koji su dodatni troškovi uključeni u otplatu hipoteke?",
         content: `
         <p>Glavninu vašeg plaćanja hipoteke čine glavnica i kamate. Glavnica je iznos koji ste posudili, dok su kamate iznos koji plaćate banci za posudbu. Osim toga postoje dodatni troškovi koji su vezani uz vašu nekretninu odnosno stambeni kredit koji otplaćujete.</p>
         <p>Glavnica: ovo je iznos koji ste posudili od zajmodavca.</p>
@@ -18,7 +18,7 @@ export const faqs = [
         `
     },
     {
-        title: 'Otplata u ratama ili anuitetima?',
+        title: "Otplata u ratama ili anuitetima?",
         content: `
         <p>Anuiteti su jednake mjesečne otplate koje se sastoje dijelom od glavnice te kamate na preostalu glavnicu pa se svakom otplatom mijenja struktura aunuiteta. Glavnica duga je iznos novca koji ste posudili od banke. Na početku kredita u anuitetu većim dijelom se otplaćuju kamate te se s vremenom to mijenja i sve se više otplaćuje glavnica.</p>
 

@@ -1,9 +1,11 @@
 import { GetStaticPaths, GetStaticProps } from "next"
-import { connectToDatabase } from "@utils/mongodb"
+import { connectToDatabase } from "src/utils/mongodb"
 const citiesList = require("@constants/statesAndCities.json")
-import { states } from "@utils/states"
-import BarChart from "@components/BarChart/BarChart"
-import { averageCalc } from "@helpers/averageCalc"
+import { states } from "src/utils/states"
+import BarChart from "src/components/BarChart/BarChart"
+import { averageCalc } from "src/helpers/averageCalc"
+import { useRouter } from "next/router"
+import Link from "next/link"
 
 type CityProps = {
   data: {
@@ -31,7 +33,8 @@ type StatesAndCities = {
 
 export default function City({ data }: CityProps) {
     console.log(data)
-
+    const router = useRouter()
+    console.log(router)
     const barChartDataPrice = data.map(item => {
         return {
             name: item._id,
@@ -60,16 +63,24 @@ export default function City({ data }: CityProps) {
     })
 
     const avgPrice = averageCalc(barChartDataPrice.map(obj => obj.value))
+    const avgPriceSum = averageCalc(barChartDataSumPrice.map(obj => obj.value))
+    const avgArea = averageCalc(barChartDataArea.map(obj => obj.value))
+    const stateNameObj = states.find(item => item.url == router.query.stateId)
+    const stateName = stateNameObj?.url == "grad-zagreb" ? stateNameObj.name : `Županija ${stateNameObj?.name}` 
 
     return (
         <>
-            <h1>{data[0].city[0]}</h1>
+            <div><Link href={`/${stateNameObj?.url}`}>{stateName}</Link> / <h1>{data[0].city[0]}</h1></div>
 
             <BarChart data={barChartDataPrice} title="Prosječna cijena po kvadratu (&#8364;/m<sup>2</sup>)" avgBarPrice={avgPrice} />
             <BarChart data={barChartDataSumPrice} title="Prosječna ukupna cijena (&#8364;)" />
             <BarChart data={barChartDataArea} title="Prosječna veličina stana (m<sup>2</sup>)" />
 
             <p>* Zbog malog uzorka označeni gradovi/kvartovi ne prikazuju relevantno stanje.</p>
+
+            <h2>Ukratko</h2>
+            <p>Prosječna cijena kvadrata stana za {data[0].city[0]} je {avgPrice} €/m2.
+            U prosjeku veličina stana na prodaji je {avgArea} m2, srednja tražena prodajna cijena iznosi {avgPriceSum} €</p>
 
             {data.map((item) => (
                 <p key={item._id}>{item._id}</p>
