@@ -60,7 +60,7 @@ export default function State({ data }: StateProps) {
     return (
         <>
             <h1>{state}</h1>
-            <BarChart data={barChartDataPrice} title="Prosječna cijena po kvadratu (&#8364;/m<sup>2</sup>)" avgBarPrice={avgPrice} />
+            <BarChart data={barChartDataPrice} title="Prosječna cijena po kvadratu (&#8364;/m<sup>2</sup>)" avgBarPrice={avgPrice} colorize={true} />
             <BarChart data={barChartDataSumPrice} title="Prosječna ukupna cijena (&#8364;)" />
             <BarChart data={barChartDataArea} title="Prosječna veličina stana (m<sup>2</sup>)" />
 

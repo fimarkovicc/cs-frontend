@@ -1,6 +1,7 @@
 import React from "react"
-import { BarChartStyled } from "./BarChart.styled"
-import { averageCalc } from "src/helpers/averageCalc"
+import { BarChartStyled } from "./BarChart.style"
+import { median } from "@global/helpers/median"
+import { colors } from "@global/styles"
 
 type BarChartProps = {
     data: {
@@ -11,41 +12,78 @@ type BarChartProps = {
     }[],
     title?: string;
     avgBarPrice?: number;
+    colorize?: boolean;
 }
 
 function BarChart(props: BarChartProps) {
-    const { data, title, avgBarPrice = 0 } = props
-    console.log(data.length)
+    const { data, title, avgBarPrice = 0, colorize = false } = props
+
     const values = data.map(obj => obj.value)
     const maxValue = Math.max(...values)
+
+    const medianTopIndex = Math.floor(median(data).medianObjIndex * 1.5)
+    const medianBottomIndex = Math.floor(median(data).medianObjIndex * 0.5)
+
+    const preparedItems = () => {
+        let barColor = colors.lightGray
+
+        return data.map((item, i) => 
+        {
+            if(colorize) {
+                if(i > medianTopIndex) {
+                    barColor = colors.green
+                }else if(i > medianBottomIndex) {
+                    barColor = colors.yellow
+                }else{
+                    barColor = colors.red
+                }
+            }
+
+            return (
+                item.id && 
+                        (
+                            (avgBarPrice && item.value > avgBarPrice && data[i+1].value < avgBarPrice && data.length > 3) ?
+                                <div key={i}>
+                                    <li>
+                                        <div className="chart-item">
+                                            <span>{item.name}{item.count < 5 && "*"}</span>
+                                            <span>{item.value}</span>
+                                        </div>
+                                        <div className="indicator">
+                                            <div className="indicator-line" style={{width: `${Math.round((item.value/maxValue)*100)}%`, backgroundColor: barColor}}></div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div className="chart-item average">
+                                            <span>Prosjek</span>
+                                            <span>{avgBarPrice}</span>
+                                        </div>
+                                        <div className="indicator">
+                                            <div className="indicator-line average" style={{width: `${Math.round((avgBarPrice/maxValue)*100)}%`, backgroundColor: ""}}></div>
+                                        </div>
+                                    </li>
+
+                                </div>
+                                :
+                                <li key={i}>
+                                    <div className="chart-item">
+                                        <span>{item.name}{item.count < 5 && "*"}</span>
+                                        <span>{item.value}</span>
+                                    </div>
+                                    <div className="indicator">
+                                        <div className="indicator-line" style={{width: `${Math.round((item.value/maxValue)*100)}%`, backgroundColor: barColor}}></div>
+                                    </div>
+                                </li>
+                        )
+            )}
+        )
+    }
 
     return (
         <BarChartStyled>
             {title && <h2 dangerouslySetInnerHTML={{__html: title}}></h2>}
             <ul className="chart">
-                {data.map((item, i) => 
-                    (
-                        item.id && 
-                            (
-                                (avgBarPrice && item.value > avgBarPrice && data[i+1].value < avgBarPrice && data.length > 3) ?
-                                    <div key={i}>
-                                        <li className="chart-item" style={{width: `${Math.round((item.value/maxValue)*100)}%`}}>
-                                            <span>{item.name}{item.count < 5 && "*"}</span>
-                                            <span>{item.value}</span>
-                                        </li>
-                                        <li className="chart-item average" style={{width: `${Math.round((avgBarPrice/maxValue)*100)}%`}}>
-                                            <span>Prosjek</span>
-                                            <span>{avgBarPrice}</span>
-                                        </li>
-                                    </div>
-                                    :
-                                    <li className="chart-item" style={{width: `${Math.round((item.value/maxValue)*100)}%`}}>
-                                        <span>{item.name}{item.count < 5 && "*"}</span>
-                                        <span>{item.value}</span>
-                                    </li>
-                            )
-                    )
-                )}
+                {preparedItems()}
             </ul>
         </BarChartStyled>
     )

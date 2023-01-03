@@ -32,9 +32,9 @@ type StatesAndCities = {
 }
 
 export default function City({ data }: CityProps) {
-    console.log(data)
+
     const router = useRouter()
-    console.log(router)
+
     const barChartDataPrice = data.map(item => {
         return {
             name: item._id,

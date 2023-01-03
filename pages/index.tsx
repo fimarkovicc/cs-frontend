@@ -1,7 +1,6 @@
 import { connectToDatabase } from "src/utils/mongodb"
 import { GetStaticProps } from "next"
 import { useRouter } from "next/router"
-import { states } from "src/utils/states"
 import { avgPriceLastYearAgg, hpMainChartAgg, recentlyAddedAgg, compareMiscAgg } from "./../src/aggregations/index"
 import RecentlyAdded from "src/components/RecentlyAdded"
 import CompareMisc from "src/components/CompareMisc"
@@ -10,6 +9,7 @@ import avgInterestRates from "src/constants/interstRates"
 import MortgageCalculator from "src/components/MortgageCalculator"
 import MortgageFaq from "src/components/MortgageFaq/MortgageFaq"
 import BarChart from "src/components/BarChart/BarChart"
+import ContentMainBanner from "@global/components/ContentMainBanner/ContentMainBanner"
 
 const collection = process.env.COLLECTION
 
@@ -38,30 +38,13 @@ export default function HomePage(props: HomeProps) {
         }
     })
 
-    const handleUrlChange = (e: { target: { value: string } }) => {
-        e.target.value && router.push(`${e.target.value}`)
-    }
-    console.log(avgPriceLastYearData)
     return (
         <div className="container">
-            <div>
-                <h2>Pratimo, analiziramo, informiramo. </h2>
-                <p>42 gradova, 157 općina, 10560 stanova</p>
-                <select onChange={handleUrlChange}>
-                    <option>--odaberi županiju--</option>
-                    {states.map((state) => {
-                        return (
-                            <option key={state.url} value={state.url}>
-                                {state.name}
-                            </option>
-                        )
-                    })}
-                </select>
-            </div>
+            <ContentMainBanner />
 
             <h2>Pregled po županijama</h2>
 
-            <BarChart data={barChartDataPrice} avgBarPrice={Math.round(avgPriceLastYearData[0].avgprice / avgPriceLastYearData[0].avgarea)} />
+            <BarChart data={barChartDataPrice} avgBarPrice={Math.round(avgPriceLastYearData[0].avgprice / avgPriceLastYearData[0].avgarea)} colorize={true} />
 
             <h2>Ukratko</h2>
             <p>Prosječna cijena kvadrata stana u Hrvatskoj u zadnjih godinu dana je {Math.round(avgPriceLastYearData[0].avgprice / avgPriceLastYearData[0].avgarea)} €/m2.</p>

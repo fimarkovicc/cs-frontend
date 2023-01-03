@@ -29,6 +29,8 @@ export const HeaderStyled = styled.header`
     }
 
     .header-nav {
+        display: flex;
+
         a {
             color: ${colors.blue};
             margin-left: 16px;
@@ -44,7 +46,7 @@ export const HeaderStyled = styled.header`
         }
 
         @media (max-width: ${sizes.spBreakpoint}) {
-            display: flex;
+            display: none;
             flex-direction: column;
             margin-top: 18px;
         }
@@ -61,7 +63,30 @@ export const HeaderStyled = styled.header`
         right: 24px;
 
         @media (max-width: ${sizes.spBreakpoint}) {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        span {
             display: block;
+            height: 2px;
+            width: 20px;
+            margin: 3px 0;
+            background-color: ${colors.darkGray};
+        }
+
+        &.open {
+            span:first-child {
+                transform: translate(0, 5px) rotate(-45deg);
+            }
+            span:nth-child(2) {
+                display: none;
+            }
+            span:nth-child(3) {
+                transform: translate(0, -3px) rotate(45deg);
+            }
         }
     }
 `
