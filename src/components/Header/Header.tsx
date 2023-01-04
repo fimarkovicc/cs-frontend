@@ -19,9 +19,7 @@ export default function Header() {
         <HeaderStyled>
             <div className="header-wrapper container">
                 <Link href="/" passHref>
-                    <span className="logo">
-                        <a>Cijene Stanova</a>
-                    </span>
+                    <a className="logo">Cijene Stanova</a>
                 </Link>
                 <nav className="header-nav" style={(isMenuOpen) ? {display: "flex"} : {display: "none"}}>
                     <a href="#gradovi">Gradovi</a>

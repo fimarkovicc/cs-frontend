@@ -1,7 +1,9 @@
 import styled from "styled-components"
-import { colors } from "@global/styles"
+import { colors, mixins } from "@global/styles"
 
 export const BarChartStyled = styled.div`
+    ${mixins.componentMargin};
+
     .chart {
         list-style-type: none;
         padding: 0;
@@ -35,5 +37,9 @@ export const BarChartStyled = styled.div`
         &.indicator-line {
             background-color: transparent;
         }
+    }
+
+    .chart-item-average-wrapper {
+        margin: 12px 0 6px 0;
     }
 `

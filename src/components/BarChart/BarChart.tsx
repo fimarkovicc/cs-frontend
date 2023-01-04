@@ -53,7 +53,7 @@ function BarChart(props: BarChartProps) {
                                             <div className="indicator-line" style={{width: `${Math.round((item.value/maxValue)*100)}%`, backgroundColor: barColor}}></div>
                                         </div>
                                     </li>
-                                    <li>
+                                    <li className="chart-item-average-wrapper">
                                         <div className="chart-item average">
                                             <span>Prosjek</span>
                                             <span>{avgBarPrice}</span>

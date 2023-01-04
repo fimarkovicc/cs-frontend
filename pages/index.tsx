@@ -1,15 +1,15 @@
 import { connectToDatabase } from "src/utils/mongodb"
 import { GetStaticProps } from "next"
-import { useRouter } from "next/router"
 import { avgPriceLastYearAgg, hpMainChartAgg, recentlyAddedAgg, compareMiscAgg } from "./../src/aggregations/index"
-import RecentlyAdded from "src/components/RecentlyAdded"
+import RecentlyAdded from "@global/components/RecentlyAdded/RecentlyAdded"
 import CompareMisc from "src/components/CompareMisc"
-import Cities from "src/components/Cities"
+import Cities from "@global/components/Cities/Cities"
 import avgInterestRates from "src/constants/interstRates"
 import MortgageCalculator from "src/components/MortgageCalculator"
 import MortgageFaq from "src/components/MortgageFaq/MortgageFaq"
 import BarChart from "src/components/BarChart/BarChart"
 import ContentMainBanner from "@global/components/ContentMainBanner/ContentMainBanner"
+import ContentPlainText from "@global/components/ContentPlainText/ContentPlainText"
 
 const collection = process.env.COLLECTION
 
@@ -27,7 +27,6 @@ type HomeProps = {
 
 export default function HomePage(props: HomeProps) {
     const { hpMainChartData, avgPriceLastYearData, recentlyAddedData, compareMiscData } = props
-    const router = useRouter()
 
     const barChartDataPrice = hpMainChartData.map(item => {
         return {
@@ -45,14 +44,13 @@ export default function HomePage(props: HomeProps) {
             <h2>Pregled po županijama</h2>
 
             <BarChart data={barChartDataPrice} avgBarPrice={Math.round(avgPriceLastYearData[0].avgprice / avgPriceLastYearData[0].avgarea)} colorize={true} />
+            <ContentPlainText barChartDataPrice={barChartDataPrice} avgPriceLastYearData={avgPriceLastYearData} avgInterestRates={avgInterestRates} />
 
-            <h2>Ukratko</h2>
-            <p>Prosječna cijena kvadrata stana u Hrvatskoj u zadnjih godinu dana je {Math.round(avgPriceLastYearData[0].avgprice / avgPriceLastYearData[0].avgarea)} €/m2.</p>
-            <p>U prosjeku veličina stana na prodaji u Hrvatskoj je {avgPriceLastYearData[0].avgarea} m2, srednja tražena prodajna cijena iznosi {avgPriceLastYearData[0].avgprice} €</p>
-            <p>Prosječna kamatna stopa za stambeni kredit je {avgInterestRates()}%.</p>
+            <div className="container component-container-2">
+                <CompareMisc data={compareMiscData} />
+                <RecentlyAdded data={recentlyAddedData} />
+            </div>
 
-            <RecentlyAdded data={recentlyAddedData} />
-            <CompareMisc data={compareMiscData} />
             <Cities />
             <MortgageCalculator />
             <MortgageFaq />

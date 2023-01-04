@@ -1,4 +1,6 @@
 import { percentDifference } from "../helpers/percentCalc"
+import RecentlyAdded from "./RecentlyAdded/RecentlyAdded"
+import { RecentlyAddedStyled } from "./RecentlyAdded/RecentlyAdded.style"
 
 type CompareMiscProps = {
     data: {
@@ -60,7 +62,7 @@ function CompareMisc(props: CompareMiscProps){
     }
 
     return (
-        <>
+        <RecentlyAddedStyled>
             <h2 id="usporedbe">Usporedbe</h2>
             <ul>
                 {citiesToCompare.map((city, i) => {
@@ -68,7 +70,7 @@ function CompareMisc(props: CompareMiscProps){
                         return <li key={city._id.toString()}>{prepareCityList(i)}</li>
                     }})}
             </ul>
-        </>
+        </RecentlyAddedStyled>
     )
 }
 

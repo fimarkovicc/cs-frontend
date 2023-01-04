@@ -9,14 +9,17 @@ export const colors = {
     blue: "#007bff",
     green: "rgb(40, 167, 69)",
     yellow: "rgb(255, 193, 7)",
-    red: "rgb(220, 53, 69)"
+    red: "rgb(220, 53, 69)",
+    brightYellow: "#fff7dd"
 
 }
 
 export const sizes = {
     spBreakpoint: "768px",
     tbBreakpoint: "1024px",
-    dtBreakpoint: "1280px"
+    dtBreakpoint: "1280px",
+    marginBetweenComponentsDt: "60px",
+    marginBetweenComponentsSp: "30px",
 }
 
 export const mixins = {
@@ -28,7 +31,14 @@ export const mixins = {
     `,
     componentBorderRadiusSmall: css`
         border-radius: 5px;
-    `
+    `,
+    componentMargin: css`
+        margin-bottom: ${sizes.marginBetweenComponentsDt};
+
+        @media (max-width: ${sizes.spBreakpoint}) {
+            margin-bottom: ${sizes.marginBetweenComponentsSp};
+        }
+    `,
 }
 
 export const GlobalStyle = createGlobalStyle`
@@ -45,6 +55,12 @@ export const GlobalStyle = createGlobalStyle`
         text-decoration: none;
     }
 
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
     .wrapper {
         display: flex;
         flex-direction: column;
@@ -59,5 +75,26 @@ export const GlobalStyle = createGlobalStyle`
 
     h2 {
         font-size: 24px;
+    }
+
+    .component-container-2 {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 60px;
+
+        @media(max-width: ${sizes.spBreakpoint}) {
+            flex-direction: column;
+            gap: 0;
+            overflow: hidden;
+        }
+
+        div {
+            flex: 1;
+
+            @media(max-width: ${sizes.spBreakpoint}) {
+                
+            }
+        }
     }
 `
