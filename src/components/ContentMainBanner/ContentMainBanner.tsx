@@ -15,7 +15,7 @@ function ContentMainBanner() {
             <h1>Pratimo, analiziramo, informiramo</h1>
             <p>42 grada, 157 općina, 62530 stanova</p>
             <select onChange={handleUrlChange}>
-                <option>--odaberi županiju--</option>
+                <option>odaberi županiju</option>
                 {states.map((state) => {
                     return (
                         <option key={state.url} value={state.url}>

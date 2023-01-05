@@ -5,7 +5,7 @@ import RecentlyAdded from "@global/components/RecentlyAdded/RecentlyAdded"
 import CompareMisc from "src/components/CompareMisc"
 import Cities from "@global/components/Cities/Cities"
 import avgInterestRates from "src/constants/interstRates"
-import MortgageCalculator from "src/components/MortgageCalculator"
+import MortgageCalculator from "@global/components/MortgageCalculator/MortgageCalculator"
 import MortgageFaq from "src/components/MortgageFaq/MortgageFaq"
 import BarChart from "src/components/BarChart/BarChart"
 import ContentMainBanner from "@global/components/ContentMainBanner/ContentMainBanner"
@@ -50,10 +50,9 @@ export default function HomePage(props: HomeProps) {
                 <CompareMisc data={compareMiscData} />
                 <RecentlyAdded data={recentlyAddedData} />
             </div>
-
-            <Cities />
             <MortgageCalculator />
             <MortgageFaq />
+            <Cities />
         </div>
     )
 }

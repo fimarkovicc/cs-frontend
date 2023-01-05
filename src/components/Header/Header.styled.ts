@@ -13,7 +13,7 @@ export const HeaderStyled = styled.header`
     .logo {
         margin: 0;
         font-size: 22px;
-        font-weight: 500;
+        font-weight: 600;
     }
 
     .header-wrapper {
@@ -34,7 +34,7 @@ export const HeaderStyled = styled.header`
         a {
             color: ${colors.blue};
             margin-left: 16px;
-            font-weight: 500;
+            font-weight: 400;
 
             &:hover {
                 text-decoration: underline;

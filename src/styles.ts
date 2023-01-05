@@ -6,7 +6,8 @@ export const colors = {
     veryLightGray: "#f8f9fa",
     lightGray: "#858585",
     semiLightGray: "#dee2e6",
-    blue: "#007bff",
+    blue: "#0b6ef9",
+    // blue: "#007bff",
     green: "rgb(40, 167, 69)",
     yellow: "rgb(255, 193, 7)",
     red: "rgb(220, 53, 69)",
@@ -64,12 +65,11 @@ export const GlobalStyle = createGlobalStyle`
     .wrapper {
         display: flex;
         flex-direction: column;
-        height: 100vh;
         padding: 0 24px;
     }
 
     .container {
-        max-width: 1200px;
+        max-width: 1100px;
         margin: 0 auto;
     }
 

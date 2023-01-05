@@ -1,9 +1,7 @@
 import React from "react"
-import ChartMortgage from "./ChartMortgage"
+import { MortgageModalStyled } from "./MortgageModal.style"
 
 type Props = {
-    isModalVisible: boolean,
-    setIsModalVisible: (isModalVisible: boolean) => void,
     mortgage: {
         principal: string,
         interestRate: string,
@@ -13,7 +11,7 @@ type Props = {
 }
 
 function MortgageModal(props: Props) {
-    const {isModalVisible, setIsModalVisible, mortgage} = props
+    const {mortgage} = props
 
     const osnovica = Number(mortgage.principal)
     const kamtatnaStopa = Number(mortgage.interestRate)*100*12
@@ -21,19 +19,9 @@ function MortgageModal(props: Props) {
     const rata = Number(mortgage.payment)
     const ukupnaIsplata = Number(mortgage.payment)*Number(mortgage.years)
 
-    const styles = {
-        width: 80 + "%",
-        minHeight: 300,
-        backgroundColor: "gray",
-        margin: "0 auto",
-        display: isModalVisible ? "block" : "none"
-    }
-
     return (
-        <>
-            <div style={styles}>
-                <span onClick={() => setIsModalVisible(false)}>Close</span>
-                <h3>Izračun kredita</h3>
+        <MortgageModalStyled>
+            <div className="text">
                 <ul>
                     <li>Osnovica: {osnovica.toLocaleString("hr-HR")}€</li>
                     <li>Kamatna stopa: {kamtatnaStopa.toLocaleString("hr-HR")}%</li>
@@ -42,9 +30,8 @@ function MortgageModal(props: Props) {
                     <li>Ukupno za isplatiti: {ukupnaIsplata.toLocaleString("hr-HR")}€</li>
                     <li>Ukupno kamata: {(ukupnaIsplata - osnovica).toLocaleString("hr-HR")}€</li>
                 </ul>
-                <ChartMortgage data={{osnovica, ukupnaIsplata}} />
             </div>
-        </>
+        </MortgageModalStyled>
     )
 }
 

@@ -1,9 +1,12 @@
-import React from "react"
+import React, { useState } from "react"
 import { cities } from "../../utils/cities"
-import Link from "next/link"
 import { CitiesStyled } from "./Cities.style"
+import CityContainer from "./CityContainer"
+import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 
 function Cities(){
+
+    const [isOpen, setIsOpen] = useState(false)
 
     function compare(a:{city: String}, b:{city: String}) {
         if (a.city < b.city){
@@ -28,29 +31,33 @@ function Cities(){
 
     sortedCities.sort(compare)
 
-    const letters = sortedCities.map(item => item.city[0]).filter(unique) 
+    const letters = sortedCities.map(item => item.city[0]).filter(unique)
+
+    const handleClick = () => {
+        setIsOpen(!isOpen)
+    }
 
     return (
         <CitiesStyled>
             <h2 id="gradovi">Gradovi</h2>
-            <div className="cities-list-wrapper">
-                {
-                    letters.map((letter, i) => {
-                        return (
-                            <div key={letter}>
-                                <span>{letter}</span>
-                                {
-                                    sortedCities.filter((item) => item.city[0] == letter).map((item, i) => {
-                                        return (
-                                            <h3 key={item.city}><Link href={item.url}>{item.city}</Link></h3>
-                                        )
-                                    })
-                                }
-                            </div>
-
-                        )
-                    })
-                }
+            <ResponsiveMasonry
+                columnsCountBreakPoints={{350: 3, 900: 5}}
+                className={["wrapper", isOpen ? "open" : ""].join(" ")}
+            >
+                <Masonry>
+                    {
+                        letters.map(letter => {
+                            return (
+                                <CityContainer key={letter} sortedCities={sortedCities} letter={letter} />
+                            )
+                        })
+                    }
+                </Masonry>
+            </ResponsiveMasonry>
+            <div className="show-more">
+                <span onClick={handleClick} role="button">
+                    {!isOpen ? "više" : "zatvori"}
+                </span>
             </div>
         </CitiesStyled>
     )

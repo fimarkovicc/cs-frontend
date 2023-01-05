@@ -20,7 +20,13 @@ function FaqItem(props: Props) {
 
     return (
         <FaqItemStyled>
-            <h3 className="title" onClick={handleClick}>{title}</h3>
+            <div className="title" role="button" onClick={handleClick}>
+                <h3>{title}</h3>
+                <div className={["faq-btn", itemIsVisible ? "active" : ""].join(" ")}>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
             <div className={itemIsVisible ? "content-visible" : "content-hidden"} dangerouslySetInnerHTML={{ __html: content }}></div>
         </FaqItemStyled>
     )
