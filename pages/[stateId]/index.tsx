@@ -5,22 +5,24 @@ import Link from "next/link"
 import BarChart from "src/components/BarChart/BarChart"
 import { averageCalc } from "src/helpers/averageCalc"
 import { capitalize } from "src/helpers/capitalize"
+import { ContentPlainTextStyled } from "@global/components/UI/ContentPlainTextStyled"
+import { CitiesStyled } from "@global/components/UI/CitiesList"
+import { labels } from "@global/constants/labels.constants"
 
 type StateProps = {
   data: {
     _id: string;
     price: number;
     area: number;
-    city: [string];
-    state: [string];
-    state_slug: [string];
+    city: string;
+    state: string;
+    state_slug: string;
     count: number;
   }[];
   state: string;
 };
 
 export default function State({ data }: StateProps) {
-
     const barChartDataPrice = data.map(item => {
         return {
             name: item.city[item.city.length-1],
@@ -57,28 +59,34 @@ export default function State({ data }: StateProps) {
         :
         capitalize(data[0].state[0].split(" ")[0]) + " " + capitalize(data[0].state[0].split(" ")[1])
 
+    const neighbourhoodsTitle = data[0].state_slug == "grad-zagreb" ? "Kvartovi" : "Gradovi/Općine"
+
     return (
-        <>
+        <div className="container">
             <h1>{state}</h1>
             <BarChart data={barChartDataPrice} title="Prosječna cijena po kvadratu (&#8364;/m<sup>2</sup>)" avgBarPrice={avgPrice} colorize={true} />
             <BarChart data={barChartDataSumPrice} title="Prosječna ukupna cijena (&#8364;)" />
             <BarChart data={barChartDataArea} title="Prosječna veličina stana (m<sup>2</sup>)" />
 
-            <p>* Zbog malog uzorka označeni gradovi/kvartovi ne prikazuju relevantno stanje.</p>
+            <p className="notice">{labels.lowSampleNotification}</p>
 
-            <h2>Ukratko</h2>
-            <p>Prosječna cijena kvadrata stana za {state} je {avgPrice} €/m2.
-            U prosjeku veličina stana na prodaji je {avgArea} m2, srednja tražena prodajna cijena iznosi {avgPriceSum} €</p>
+            <ContentPlainTextStyled>
+                <h2>Ukratko</h2>
+                <p>Prosječna cijena kvadrata stana za <b>{state}</b> je <em>{avgPrice} €/m<sup>2</sup></em>.
+            U prosjeku veličina stana na prodaji je <em>{avgArea} m2</em>, srednja tražena prodajna cijena iznosi <em>{avgPriceSum} €</em></p>
+            </ContentPlainTextStyled>
 
-            <h2>Gradovi</h2>
-            <ul>
-                {data.map((item) => (
-                    <li key={item._id}>
-                        <Link href={`/${item.state_slug[0]}/${item._id}`}>{item.city[0]}</Link>
-                    </li>
-                ))}
-            </ul>
-        </>
+            <CitiesStyled>
+                <h2>{neighbourhoodsTitle}</h2>
+                <ul>
+                    {data.map((item) => (
+                        <li key={item._id}>
+                            <Link href={`/${item.state_slug[0]}/${item._id}`}>{item.city[0]}</Link>
+                        </li>
+                    ))}
+                </ul>
+            </CitiesStyled>
+        </div>
     )
 }
 

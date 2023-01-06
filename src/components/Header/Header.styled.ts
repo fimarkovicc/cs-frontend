@@ -1,7 +1,11 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { colors, sizes, mixins } from "@global/styles"
 
-export const HeaderStyled = styled.header`
+type Props = {
+    isHomePage: boolean;
+}
+
+export const HeaderStyled = styled.header<Props>`
     position: relative;
     background-color: #fff;
     border-bottom: 1px solid ${colors.semiDarkGray};
@@ -30,6 +34,7 @@ export const HeaderStyled = styled.header`
 
     .header-nav {
         display: flex;
+        align-items: flex-start;
 
         a {
             color: ${colors.blue};
@@ -88,5 +93,13 @@ export const HeaderStyled = styled.header`
                 transform: translate(0, -3px) rotate(45deg);
             }
         }
+    }
+    select {
+        ${props => !props.isHomePage &&
+        css `
+            background-color: #fff;
+            color: ${colors.blue};
+            border-color: ${colors.blue};
+        `}
     }
 `

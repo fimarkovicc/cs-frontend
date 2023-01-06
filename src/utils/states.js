@@ -19,5 +19,5 @@ export const states = [
     { url: "varazdinska", name: "varaždinska" },
     { url: "vukovarsko-srijemska", name: "vukovarsko-srijemska" },
     { url: "zadarska", name: "zadarska" },
-    { url: "zagrebacka", name: "zagrebačka" },
+    { url: "zagrebacka", name: "zagrebačka" }
 ]

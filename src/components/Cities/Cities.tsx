@@ -54,10 +54,7 @@ function Cities(){
                     }
                 </Masonry>
             </ResponsiveMasonry>
-            <div className="show-more">
-                <span onClick={handleClick} role="button">
-                    {!isOpen ? "više" : "zatvori"}
-                </span>
+            <div className={["show-more", isOpen ? "open" : ""].join(" ")} onClick={handleClick} role="button">
             </div>
         </CitiesStyled>
     )

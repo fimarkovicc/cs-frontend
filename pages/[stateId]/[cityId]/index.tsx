@@ -6,6 +6,8 @@ import BarChart from "src/components/BarChart/BarChart"
 import { averageCalc } from "src/helpers/averageCalc"
 import { useRouter } from "next/router"
 import Link from "next/link"
+import { ContentPlainTextStyled } from "@global/components/UI/ContentPlainTextStyled"
+import { labels } from "@global/constants/labels.constants"
 
 type CityProps = {
   data: {
@@ -32,7 +34,6 @@ type StatesAndCities = {
 }
 
 export default function City({ data }: CityProps) {
-
     const router = useRouter()
 
     const barChartDataPrice = data.map(item => {
@@ -69,23 +70,21 @@ export default function City({ data }: CityProps) {
     const stateName = stateNameObj?.url == "grad-zagreb" ? stateNameObj.name : `Županija ${stateNameObj?.name}` 
 
     return (
-        <>
-            <div><Link href={`/${stateNameObj?.url}`}>{stateName}</Link> / <h1>{data[0].city[0]}</h1></div>
+        <div className="container">
+            <div className="neighbourhood-page-heading"><h1><Link href={`/${stateNameObj?.url}`}>{stateName}</Link> / {data[0].city[0]}</h1></div>
 
-            <BarChart data={barChartDataPrice} title="Prosječna cijena po kvadratu (&#8364;/m<sup>2</sup>)" avgBarPrice={avgPrice} />
+            <BarChart data={barChartDataPrice} title="Prosječna cijena po kvadratu (&#8364;/m<sup>2</sup>)" avgBarPrice={avgPrice} colorize={true} />
             <BarChart data={barChartDataSumPrice} title="Prosječna ukupna cijena (&#8364;)" />
             <BarChart data={barChartDataArea} title="Prosječna veličina stana (m<sup>2</sup>)" />
 
-            <p>* Zbog malog uzorka označeni gradovi/kvartovi ne prikazuju relevantno stanje.</p>
+            <p className="notice">{labels.lowSampleNotification}</p>
 
-            <h2>Ukratko</h2>
-            <p>Prosječna cijena kvadrata stana za {data[0].city[0]} je {avgPrice} €/m2.
-            U prosjeku veličina stana na prodaji je {avgArea} m2, srednja tražena prodajna cijena iznosi {avgPriceSum} €</p>
-
-            {data.map((item) => (
-                <p key={item._id}>{item._id}</p>
-            ))}
-        </>
+            <ContentPlainTextStyled>
+                <h2>Ukratko</h2>
+                <p>Prosječna cijena kvadrata stana za {data[0].city[0]} je <em>{avgPrice} €/m2</em>.
+            U prosjeku veličina stana na prodaji je <em>{avgArea} m2</em>, srednja tražena prodajna cijena iznosi <em>{avgPriceSum} €</em></p>
+            </ContentPlainTextStyled>
+        </div>
     )
 }
 

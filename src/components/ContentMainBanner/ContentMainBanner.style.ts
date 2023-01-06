@@ -31,13 +31,4 @@ export const ContentMainBannerStyled = styled.div`
             font-size: 5vw;
         }
     }
-
-    select {
-        padding: 14px 20px;
-        background-color: ${colors.blue};
-        color: white;
-        font-size: 18px;
-        ${mixins.componentBorderRadius};
-        text-transform: capitalize;
-    }
 `

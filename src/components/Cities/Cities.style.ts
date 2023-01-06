@@ -38,9 +38,28 @@ export const CitiesStyled = styled.div`
     .show-more {
         text-align: center;
         border-top: 1px solid ${colors.darkGray};
+        height: 24px;
 
         &:hover {
             cursor: pointer;
+        }
+
+        &:before {
+            content: "";
+            height: 24px;
+            content: "";
+            background-image: url(/images/Arrow-down.svg);
+            width: 24px;
+            position: absolute;
+            background-position: center center;
+            background-size: 24px;
+            background-repeat: no-repeat;
+        }
+
+        &.open {
+            &:before {
+                transform: rotate(180deg);
+            }
         }
     }
 `

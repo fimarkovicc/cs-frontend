@@ -42,6 +42,7 @@ export default function HomePage(props: HomeProps) {
             <ContentMainBanner />
 
             <h2>Pregled po županijama</h2>
+            <h3>Prosječna cijena kvadrata (€/m<sup>2</sup>)</h3>
 
             <BarChart data={barChartDataPrice} avgBarPrice={Math.round(avgPriceLastYearData[0].avgprice / avgPriceLastYearData[0].avgarea)} colorize={true} />
             <ContentPlainText barChartDataPrice={barChartDataPrice} avgPriceLastYearData={avgPriceLastYearData} avgInterestRates={avgInterestRates} />
@@ -51,8 +52,8 @@ export default function HomePage(props: HomeProps) {
                 <RecentlyAdded data={recentlyAddedData} />
             </div>
             <MortgageCalculator />
-            <MortgageFaq />
             <Cities />
+            <MortgageFaq />
         </div>
     )
 }

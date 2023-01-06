@@ -1,3 +1,4 @@
+import { colors } from "@global/styles"
 import styled from "styled-components"
 
 export const FaqItemStyled = styled.div`
@@ -46,5 +47,9 @@ export const FaqItemStyled = styled.div`
                 transform: rotate(180deg) translateY(-2px);
             }
         }
+    }
+
+    h3 {
+        color: ${colors.black};
     }
 `

@@ -1,6 +1,7 @@
 import { createGlobalStyle, css } from "styled-components"
 
 export const colors = {
+    black: "rgb(25, 28, 31)",
     darkGray: "#212529",
     semiDarkGray: "#dee2e6",
     veryLightGray: "#f8f9fa",
@@ -50,6 +51,7 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         font-family: "Inter", sans-serif;
         background-color: ${colors.veryLightGray};
+        color: ${colors.black};
     }
 
     a {
@@ -96,5 +98,28 @@ export const GlobalStyle = createGlobalStyle`
                 
             }
         }
+    }
+
+    .notice {
+        margin-top: -30px;
+        margin-bottom: 60px;
+    }
+
+    .neighbourhood-page-heading {
+        display: flex;
+        align-items: center;
+        text-transform: capitalize;
+
+        h1 {
+            margin-bottom: 0;
+        }
+
+        a {
+            color: ${colors.darkGray};
+        }
+    }
+
+    h3 {
+        color: ${colors.lightGray};
     }
 `
