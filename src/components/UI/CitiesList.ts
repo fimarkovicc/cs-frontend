@@ -1,4 +1,4 @@
-import { colors, mixins } from "@global/styles"
+import { colors, mixins, sizes } from "@global/styles"
 import styled from "styled-components"
 
 export const CitiesStyled = styled.div`
@@ -17,6 +17,11 @@ export const CitiesStyled = styled.div`
             padding: 16px;
             ${mixins.componentBorderRadius};
             border: 1px solid transparent;
+
+            @media (max-width: ${sizes.spBreakpoint}) {
+                padding: 6px;
+                font-size: 14px;
+            }
 
             &:hover {
                 border: 1px solid ${colors.blue};

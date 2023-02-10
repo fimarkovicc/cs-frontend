@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import MortgageModal from "./MortgageModal/MortgageModal"
-import avgInterestRates from "@constants/interstRates"
 import { MortgageCalculatorStyled } from "./MortgageCalculator.style"
 import PieChart from "./PieChart/PieChart"
 
@@ -11,8 +10,13 @@ type MortgageType = {
     payment: number;
 }
 
-function MortgageCalculator(){
-    const avgInterestRate = avgInterestRates()
+type MortgageCalculatorProps = {
+    interest: number;
+}
+
+function MortgageCalculator(props: MortgageCalculatorProps){
+    const {interest} = props
+    const avgInterestRate = interest
 
     const [principal, setPrincipal] = useState("120000")
     const [interestRate, setInterestRate] = useState(avgInterestRate as any)

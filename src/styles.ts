@@ -103,6 +103,10 @@ export const GlobalStyle = createGlobalStyle`
     .notice {
         margin-top: -30px;
         margin-bottom: 60px;
+
+        @media (max-width: ${sizes.spBreakpoint}) {
+            margin-top: 0;
+        }
     }
 
     .neighbourhood-page-heading {

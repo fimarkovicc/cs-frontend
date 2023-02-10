@@ -5,12 +5,12 @@ import { FaqItemStyled } from "./FaqItem.styled"
 type Props = {
     item: {
         title: string,
-        content: string
+        text: string
     }
 }
 
 function FaqItem(props: Props) {
-    const { title, content } = props.item
+    const { title, text } = props.item
 
     const [itemIsVisible, setItemIsVisible] = useState(false)
 
@@ -27,7 +27,7 @@ function FaqItem(props: Props) {
                     <span></span>
                 </div>
             </div>
-            <div className={itemIsVisible ? "content-visible" : "content-hidden"} dangerouslySetInnerHTML={{ __html: content }}></div>
+            <div className={itemIsVisible ? "content-visible" : "content-hidden"} dangerouslySetInnerHTML={{ __html: text }}></div>
         </FaqItemStyled>
     )
 }

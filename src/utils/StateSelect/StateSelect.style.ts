@@ -13,6 +13,6 @@ export const StateSelectStyled = styled.div`
         background-image: url("/images/Ic_arrow_drop_down_36px.svg");
         background-repeat: no-repeat;
         background-position: center right;
-        width: 85%;
+        max-width: 200px;
     }
 `

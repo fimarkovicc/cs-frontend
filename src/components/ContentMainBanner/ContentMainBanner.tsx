@@ -1,6 +1,6 @@
 import React from "react"
 import { ContentMainBannerStyled } from "./ContentMainBanner.style"
-import StateSelect from "@global/utils/StateSelect/stateSelect"
+import StateSelect from "@global/utils/StateSelect/StateSelect"
 
 function ContentMainBanner() {
     return (

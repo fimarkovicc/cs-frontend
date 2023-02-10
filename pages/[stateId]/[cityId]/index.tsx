@@ -8,6 +8,7 @@ import { useRouter } from "next/router"
 import Link from "next/link"
 import { ContentPlainTextStyled } from "@global/components/UI/ContentPlainTextStyled"
 import { labels } from "@global/constants/labels.constants"
+import Head from "next/head"
 
 type CityProps = {
   data: {
@@ -71,6 +72,10 @@ export default function City({ data }: CityProps) {
 
     return (
         <div className="container">
+            <Head>
+                <title>Cijene stanova - {data[0].city[0]}</title>
+                <meta name="description" content={`Cijene stanova u ${data[0].city[0]}`} />
+            </Head>
             <div className="neighbourhood-page-heading"><h1><Link href={`/${stateNameObj?.url}`}>{stateName}</Link> / {data[0].city[0]}</h1></div>
 
             <BarChart data={barChartDataPrice} title="Prosječna cijena po kvadratu (&#8364;/m<sup>2</sup>)" avgBarPrice={avgPrice} colorize={true} />

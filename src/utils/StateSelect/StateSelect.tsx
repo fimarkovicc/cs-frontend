@@ -12,7 +12,7 @@ function StateSelect() {
 
     return (
         <StateSelectStyled>
-            <select onChange={handleUrlChange} value={"abc"}>
+            <select onChange={handleUrlChange} value={""}>
                 <option value=''>odaberi županiju</option>
                 {states.map((state) => {
                     return (

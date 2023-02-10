@@ -4,7 +4,8 @@ export default function Footer() {
     return (
         <FooterStyled>
             <footer className="container">
-              © Cijene Stanova {new Date().getFullYear()}
+                <p>© Cijene Stanova {new Date().getFullYear() + " - "} 
+                    <a href="mailto:cijenestanova@gmail.com">Kontakt</a></p>
             </footer>
         </FooterStyled>
     )

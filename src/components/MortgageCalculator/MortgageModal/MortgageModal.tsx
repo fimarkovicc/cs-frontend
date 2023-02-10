@@ -1,5 +1,6 @@
 import React from "react"
 import { MortgageModalStyled } from "./MortgageModal.style"
+import { labels } from "@global/constants/labels.constants"
 
 type Props = {
     mortgage: {
@@ -23,12 +24,12 @@ function MortgageModal(props: Props) {
         <MortgageModalStyled>
             <div className="text">
                 <ul>
-                    <li>Osnovica: {osnovica.toLocaleString("hr-HR")}€</li>
-                    <li>Kamatna stopa: {kamtatnaStopa.toLocaleString("hr-HR")}%</li>
+                    <li>Osnovica: {osnovica.toLocaleString(labels.locale)}€</li>
+                    <li>Kamatna stopa: {kamtatnaStopa.toLocaleString(labels.locale)}%</li>
                     <li>Trajanje otplate: {godineOtplate} godina</li>
-                    <li>Mjesečna rata: {rata.toLocaleString("hr-HR")}€</li>
-                    <li>Ukupno za isplatiti: {ukupnaIsplata.toLocaleString("hr-HR")}€</li>
-                    <li>Ukupno kamata: {(ukupnaIsplata - osnovica).toLocaleString("hr-HR")}€</li>
+                    <li>Mjesečna rata: {rata.toLocaleString(labels.locale)}€</li>
+                    <li>Ukupno za isplatiti: {ukupnaIsplata.toLocaleString(labels.locale)}€</li>
+                    <li>Ukupno kamata: {(ukupnaIsplata - osnovica).toLocaleString(labels.locale)}€</li>
                 </ul>
             </div>
         </MortgageModalStyled>

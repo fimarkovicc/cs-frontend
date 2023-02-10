@@ -1,3 +1,4 @@
 export const labels = {
-    lowSampleNotification: "* Zbog malog uzorka označeni gradovi/kvartovi ne prikazuju relevantno stanje."
+    lowSampleNotification: "* Zbog malog uzorka označeni gradovi/kvartovi ne prikazuju relevantno stanje.",
+    locale: "hr-HR"
 }

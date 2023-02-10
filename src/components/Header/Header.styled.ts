@@ -2,7 +2,7 @@ import styled, { css } from "styled-components"
 import { colors, sizes, mixins } from "@global/styles"
 
 type Props = {
-    isHomePage: boolean;
+    isMenuOpen: boolean;
 }
 
 export const HeaderStyled = styled.header<Props>`
@@ -32,28 +32,41 @@ export const HeaderStyled = styled.header<Props>`
         }
     }
 
-    .header-nav {
-        display: flex;
+    .header-mobile-nav {
+        display: none;
         align-items: flex-start;
+        flex-direction: column;
+        margin-top: 18px;
+
+        @media (max-width: ${sizes.spBreakpoint}) {
+            ${props => props.isMenuOpen ? "display: flex" : "display: none"};
+        }
 
         a {
             color: ${colors.blue};
             margin-left: 16px;
             font-weight: 400;
+            margin: 8px 0;
 
             &:hover {
                 text-decoration: underline;
             }
 
-            @media (max-width: ${sizes.spBreakpoint}) {
-                margin: 8px 0;
+            &:last-of-type {
+                margin-bottom: 18px;
             }
         }
+    }
 
+    .header-desktop-nav {
         @media (max-width: ${sizes.spBreakpoint}) {
             display: none;
-            flex-direction: column;
-            margin-top: 18px;
+        }
+
+        a {
+            color: ${colors.blue};
+            margin-left: 16px;
+            font-weight: 400;
         }
     }
 
@@ -93,13 +106,5 @@ export const HeaderStyled = styled.header<Props>`
                 transform: translate(0, -3px) rotate(45deg);
             }
         }
-    }
-    select {
-        ${props => !props.isHomePage &&
-        css `
-            background-color: #fff;
-            color: ${colors.blue};
-            border-color: ${colors.blue};
-        `}
     }
 `

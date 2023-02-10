@@ -8,6 +8,7 @@ import { capitalize } from "src/helpers/capitalize"
 import { ContentPlainTextStyled } from "@global/components/UI/ContentPlainTextStyled"
 import { CitiesStyled } from "@global/components/UI/CitiesList"
 import { labels } from "@global/constants/labels.constants"
+import Head from "next/head"
 
 type StateProps = {
   data: {
@@ -63,6 +64,10 @@ export default function State({ data }: StateProps) {
 
     return (
         <div className="container">
+            <Head>
+                <title>Cijene stanova - {state}</title>
+                <meta name="description" content={`Cijene stanova u ${state}`} />
+            </Head>
             <h1>{state}</h1>
             <BarChart data={barChartDataPrice} title="Prosječna cijena po kvadratu (&#8364;/m<sup>2</sup>)" avgBarPrice={avgPrice} colorize={true} />
             <BarChart data={barChartDataSumPrice} title="Prosječna ukupna cijena (&#8364;)" />

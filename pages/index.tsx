@@ -4,14 +4,15 @@ import { avgPriceLastYearAgg, hpMainChartAgg, recentlyAddedAgg, compareMiscAgg }
 import RecentlyAdded from "@global/components/RecentlyAdded/RecentlyAdded"
 import CompareMisc from "src/components/CompareMisc"
 import Cities from "@global/components/Cities/Cities"
-import avgInterestRates from "src/constants/interstRates"
 import MortgageCalculator from "@global/components/MortgageCalculator/MortgageCalculator"
 import MortgageFaq from "src/components/MortgageFaq/MortgageFaq"
 import BarChart from "src/components/BarChart/BarChart"
 import ContentMainBanner from "@global/components/ContentMainBanner/ContentMainBanner"
 import ContentPlainText from "@global/components/ContentPlainText/ContentPlainText"
+import Head from "next/head"
 
 const collection = process.env.COLLECTION
+const faq = process.env.COLLECTION_FAQ
 
 type HomeProps = {
   hpMainChartData: {
@@ -22,38 +23,51 @@ type HomeProps = {
   }[],
   avgPriceLastYearData: any,
   recentlyAddedData: any,
-  compareMiscData: any
+  compareMiscData: any,
+  faqData: {
+    title: string;
+    text: string;
+  }[],
+  constants: {
+    mortgageInterestRate: number;
+  }[]
 };
 
 export default function HomePage(props: HomeProps) {
-    const { hpMainChartData, avgPriceLastYearData, recentlyAddedData, compareMiscData } = props
+    const { hpMainChartData, avgPriceLastYearData, recentlyAddedData, compareMiscData, faqData, constants } = props
 
-    const barChartDataPrice = hpMainChartData.map(item => {
-        return {
-            name: item.state[item.state.length-1],
-            value: Math.round(item.price),
-            id: item._id,
-            count: item.count
-        }
-    })
+    const barChartDataPrice = hpMainChartData
+        .filter(item => item._id != "istarska" && item._id != "medimurje")
+        .map(item => {
+            return {
+                name: item.state[item.state.length-1],
+                value: Math.round(item.price),
+                id: item._id,
+                count: item.count
+            }
+        })
 
     return (
         <div className="container">
+            <Head>
+                <title>Cijene stanova - početna</title>
+                <meta name="description" content="Cijene stanova u Hrvatskoj" />
+            </Head>
             <ContentMainBanner />
 
             <h2>Pregled po županijama</h2>
             <h3>Prosječna cijena kvadrata (€/m<sup>2</sup>)</h3>
 
             <BarChart data={barChartDataPrice} avgBarPrice={Math.round(avgPriceLastYearData[0].avgprice / avgPriceLastYearData[0].avgarea)} colorize={true} />
-            <ContentPlainText barChartDataPrice={barChartDataPrice} avgPriceLastYearData={avgPriceLastYearData} avgInterestRates={avgInterestRates} />
+            <ContentPlainText interest={constants[0].mortgageInterestRate} barChartDataPrice={barChartDataPrice} avgPriceLastYearData={avgPriceLastYearData} />
 
             <div className="container component-container-2">
                 <CompareMisc data={compareMiscData} />
                 <RecentlyAdded data={recentlyAddedData} />
             </div>
-            <MortgageCalculator />
+            <MortgageCalculator interest={constants[0].mortgageInterestRate} />
             <Cities />
-            <MortgageFaq />
+            <MortgageFaq data={faqData}/>
         </div>
     )
 }
@@ -81,12 +95,24 @@ export const getStaticProps: GetStaticProps = async (context) => {
         .aggregate(compareMiscAgg)
         .toArray()
 
+    const faqData = await db
+        .collection(faq)
+        .find({})
+        .toArray()
+
+    const constants = await db
+        .collection("constants")
+        .find({})
+        .toArray()
+
     return {
         props: {
             hpMainChartData: JSON.parse(JSON.stringify(hpMainChartData)),
             avgPriceLastYearData: JSON.parse(JSON.stringify(avgPriceLastYearData)),
             recentlyAddedData: JSON.parse(JSON.stringify(recentlyAddedData)),
-            compareMiscData: JSON.parse(JSON.stringify(compareMiscData))
+            compareMiscData: JSON.parse(JSON.stringify(compareMiscData)),
+            faqData: JSON.parse(JSON.stringify(faqData)),
+            constants: JSON.parse(JSON.stringify(constants))
         },
         revalidate: 86400
     }

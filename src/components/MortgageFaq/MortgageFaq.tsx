@@ -1,14 +1,21 @@
 import FaqItem from "./FaqItem/FaqItem"
-import { faqs } from "src/constants/faqs"
 import { MortgageFaqStyled } from "./MortgageFaq.style"
 
-function MortgageFaq(){
+type MortgageFaqProps = {
+    data: {
+        title: string;
+        text: string;
+    }[]
+}
+
+function MortgageFaq(props: MortgageFaqProps){
+    const {data} = props
 
     return(
         <MortgageFaqStyled>
             <h2 id="faq">Često postavljena pitanja</h2>
             <ul>
-                {faqs.map((item) => {
+                {data.map((item) => {
                     return <li key={item.title}><FaqItem item={item} /></li>
                 })}
             </ul>
