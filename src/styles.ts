@@ -8,7 +8,6 @@ export const colors = {
     lightGray: "#858585",
     semiLightGray: "#dee2e6",
     blue: "#0b6ef9",
-    // blue: "#007bff",
     green: "rgb(40, 167, 69)",
     yellow: "rgb(255, 193, 7)",
     red: "rgb(220, 53, 69)",
@@ -52,6 +51,13 @@ export const GlobalStyle = createGlobalStyle`
         font-family: "Inter", sans-serif;
         background-color: ${colors.veryLightGray};
         color: ${colors.black};
+    }
+
+    #__next {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+        justify-content: flex-start;
     }
 
     a {
@@ -125,5 +131,17 @@ export const GlobalStyle = createGlobalStyle`
 
     h3 {
         color: ${colors.lightGray};
+    }
+
+    .error-page {
+        text-align: center;
+
+        h1 {
+            font-size: 48px;
+        }
+
+        a {
+            text-decoration: underline;
+        }
     }
 `

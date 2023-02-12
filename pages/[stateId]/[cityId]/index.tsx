@@ -69,7 +69,7 @@ export default function City({ data }: CityProps) {
     const avgArea = averageCalc(barChartDataArea.map(obj => obj.value))
     const stateNameObj = states.find(item => item.url == router.query.stateId)
     const stateName = stateNameObj?.url == "grad-zagreb" ? stateNameObj.name : `Županija ${stateNameObj?.name}` 
-
+    
     return (
         <div className="container">
             <Head>
@@ -108,12 +108,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     const aggregation = [
         {
             $match: {
-                city_slug: params?.cityId,
-
-                date: {
-                    $gte: new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
-                },
-            },
+                city_slug: params?.cityId
+            }
         },
         {
             $group: {
@@ -136,6 +132,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         .toArray()
 
     return {
-        props: { data }
+        props: { data },
+        revalidate: 86400
     }
 }

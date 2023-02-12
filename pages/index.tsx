@@ -50,7 +50,7 @@ export default function HomePage(props: HomeProps) {
     return (
         <div className="container">
             <Head>
-                <title>Cijene stanova - početna</title>
+                <title>Cijene stanova</title>
                 <meta name="description" content="Cijene stanova u Hrvatskoj" />
             </Head>
             <ContentMainBanner />
