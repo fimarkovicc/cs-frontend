@@ -4,12 +4,13 @@ import Footer from "@global/components/Footer/Footer"
 import { GlobalStyle } from "@global/styles"
 
 function MyApp({ Component, pageProps }: AppProps) {
+    const AnyComponent = Component as any
     return (
         <>
             <GlobalStyle />
             <Header />
             <div className="wrapper">
-                <Component {...pageProps} />
+                <AnyComponent {...pageProps} />
             </div>
             <Footer />
         </>
