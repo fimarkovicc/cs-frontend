@@ -27,6 +27,10 @@ export const FaqItemStyled = styled.div`
         align-items: center;
         position: relative;
         top: 8px;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     .faq-btn {
