@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { colors, mixins } from "@global/styles"
+import { colors, mixins, sizes } from "@global/styles"
 
 export const BarChartStyled = styled.div`
     ${mixins.componentMargin};
@@ -10,7 +10,9 @@ export const BarChartStyled = styled.div`
 
         li {
             &:hover {
-                background: ${colors.semiLightGray};
+                @media (min-width: ${sizes.tbBreakpoint}) {
+                    background: ${colors.semiLightGray};
+                }
             }
         }
     }

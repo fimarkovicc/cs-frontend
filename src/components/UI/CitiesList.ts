@@ -12,15 +12,18 @@ export const CitiesStyled = styled.div`
         flex-wrap: wrap;
         gap: 10px;
 
+        @media (max-width: ${sizes.spBreakpoint}) {
+            padding: 8px;
+        }
+
         li {
             background: #fff;
-            padding: 16px;
+            display: flex;
             ${mixins.componentBorderRadius};
             border: 1px solid transparent;
 
             @media (max-width: ${sizes.spBreakpoint}) {
-                padding: 6px;
-                font-size: 14px;
+                font-size: 12px;
             }
 
             &:hover {
@@ -29,6 +32,11 @@ export const CitiesStyled = styled.div`
 
             a {
                 color: ${colors.blue};
+                padding: 10px;
+
+                @media (max-width: ${sizes.spBreakpoint}) {
+                    padding: 6px;
+                }
             }
         }
     }

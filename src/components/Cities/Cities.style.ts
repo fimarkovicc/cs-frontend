@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { mixins, colors } from "@global/styles"
+import { mixins, colors, sizes } from "@global/styles"
 
 export const CitiesStyled = styled.div`
     ${mixins.componentMargin};
@@ -14,6 +14,10 @@ export const CitiesStyled = styled.div`
     a {
         color: ${colors.blue};
         font-size: 16px;
+
+        @media (max-width: ${sizes.spBreakpoint}) {
+            font-size: 14px;
+        }
     }
 
     h3 {
