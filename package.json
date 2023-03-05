@@ -12,7 +12,6 @@
   "dependencies": {
     "mongodb": "^4.1.3",
     "next": "^12.2.2",
-    "next-sitemap": "^3.1.52",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-responsive-masonry": "^2.1.7",
