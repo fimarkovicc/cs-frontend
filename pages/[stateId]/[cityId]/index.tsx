@@ -36,6 +36,7 @@ type StatesAndCities = {
 
 export default function City({ data }: CityProps) {
     const router = useRouter()
+    if (data.length == 0) return null    
 
     const barChartDataPrice = data.map(item => {
         return {
