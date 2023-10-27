@@ -37,7 +37,8 @@
       ],
       "@styles/*": [
         "src/styles.ts"
-      ]
+      ],
+      "react": [ "./node_modules/@types/react" ]
     }
   },
   "include": [
