@@ -23,7 +23,7 @@ type StateProps = {
   state: string;
 };
 
-export default function State({ data }: StateProps) {
+export default function State({ data }: StateProps) {    
     const barChartDataPrice = data.map(item => {
         return {
             name: item.city[item.city.length-1],
@@ -112,6 +112,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
                 date: {
                     $gte: new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
                 },
+                price: {
+                    $gt: 1
+                },
+                area: {$gt: 1}
             },
         },
 
@@ -127,14 +131,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
             },
         },
         { $sort: { price: -1 } },
-    ]
+    ]    
 
     const { db } = await connectToDatabase()
 
     const data = await db
         .collection("stanovi_njuskalo")
         .aggregate(aggregation)
-        .toArray()
+        .toArray()        
 
     return {
         props: { data },

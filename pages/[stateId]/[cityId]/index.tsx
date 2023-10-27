@@ -109,7 +109,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     const aggregation = [
         {
             $match: {
-                city_slug: params?.cityId
+                city_slug: params?.cityId,
+                price: {
+                    $gt: 1
+                },
+                area: {$gt: 1}
             }
         },
         {
