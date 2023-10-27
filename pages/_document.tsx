@@ -1,3 +1,4 @@
+// @ts-ignore
 import { Html, Head, Main, NextScript } from "next/document"
 // eslint-disable-next-line
 import Script from "next/script"
@@ -5,7 +6,6 @@ import Script from "next/script"
 export default function Document() {
 
     return (
-        <>
         <Html lang="hr-HR">
             <Head>
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -30,6 +30,5 @@ export default function Document() {
                 <NextScript />
             </body>
         </Html>
-        </>
     )
 }
