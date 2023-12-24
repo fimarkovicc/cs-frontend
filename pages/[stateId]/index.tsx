@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { GetStaticProps, GetStaticPaths } from "next"
 import { states } from "src/utils/states"
 import { connectToDatabase } from "src/utils/mongodb"
