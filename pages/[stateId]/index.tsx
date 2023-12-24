@@ -105,10 +105,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+    let stateId
+    if( params?.stateId == "medimurska"){
+        stateId = "medimurje"
+    }else{
+        stateId = params?.stateId
+    }
+
     const aggregation = [
         {
             $match: {
-                state_slug: params?.stateId,
+                state_slug: stateId,
                 date: {
                     $gte: new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
                 },
@@ -138,7 +145,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     const data = await db
         .collection("stanovi_njuskalo")
         .aggregate(aggregation)
-        .toArray()        
+        .toArray() 
 
     return {
         props: { data },
