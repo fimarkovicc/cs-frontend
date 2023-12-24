@@ -2,10 +2,10 @@ import styled from "styled-components"
 import { colors, sizes } from "@global/styles"
 
 type Props = {
-    principalPercent?: number;
+    principalPercent: number;
 }
 
-export const PieChartStyled = styled.div<Props>`
+export const PieChartStyled = styled.div<any>`
 	width: 25%;
 
 	@media (max-width: ${sizes.spBreakpoint}) {
