@@ -1,12 +1,11 @@
 import styled, { css } from "styled-components"
 import { colors, sizes, mixins } from "@global/styles"
-import styledComponents from "styled-components";
 
 type Props = {
     isMenuOpen: boolean;
 }
 
-export const HeaderStyled = styledComponents.header<Props>`
+export const HeaderStyled = styled.header<Props>`
     position: relative;
     background-color: #fff;
     border-bottom: 1px solid ${colors.semiDarkGray};
