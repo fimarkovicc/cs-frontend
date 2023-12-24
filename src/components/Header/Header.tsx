@@ -53,7 +53,7 @@ export default function Header() {
     return (
         <HeaderStyled isMenuOpen={isMenuOpen}>
             <div className="header-wrapper container">
-                <Link href="/" passHref>
+                <Link legacyBehavior href="/" passHref>
                     <a className="logo">Cijene Stanova</a>
                 </Link>
                 {renderMobileNav()}
