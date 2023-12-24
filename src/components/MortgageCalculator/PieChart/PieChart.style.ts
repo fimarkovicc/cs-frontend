@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { colors, sizes } from "@global/styles"
 
 type Props = {
-    principalPercent: number;
+    principalPercent?: number;
 }
 
 export const PieChartStyled = styled.div<Props>`
