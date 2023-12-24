@@ -5,7 +5,7 @@ type Props = {
     isMenuOpen: boolean;
 }
 
-export const HeaderStyled = styled.header<Props>`
+export const HeaderStyled = styled.header<any>`
     position: relative;
     background-color: #fff;
     border-bottom: 1px solid ${colors.semiDarkGray};
